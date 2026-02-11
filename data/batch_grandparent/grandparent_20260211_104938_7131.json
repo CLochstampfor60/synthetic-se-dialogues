@@ -1,0 +1,182 @@
+{
+  "conversation_id": "grandparent_20260211_104938_7131",
+  "scam_type": "grandparent",
+  "attacker_config": {
+    "role": "bail_bondsman",
+    "claimed_gender": null,
+    "scammer_persona_name": null,
+    "speech_pattern": "professional_urgent",
+    "emergency_type": "dui_arrest",
+    "location": "county detention center",
+    "initial_amount": 9500,
+    "floor_amount": 4000,
+    "payment_method": "cash_courier",
+    "urgency_level": "high"
+  },
+  "victim_config": {
+    "victim_name": "Dorothy",
+    "age": 78,
+    "gender": "female",
+    "living_situation": "lives_alone",
+    "grandchildren": [
+      {
+        "name": "Michael",
+        "gender": "male"
+      },
+      {
+        "name": "Jennifer",
+        "gender": "female"
+      },
+      {
+        "name": "David",
+        "gender": "male"
+      }
+    ],
+    "relationship_closeness": "moderate",
+    "trust_level": "highly_trusting",
+    "tech_savviness": "very_low",
+    "scam_awareness": "unaware",
+    "emotional_tendency": "highly_emotional",
+    "financial_comfort": "comfortable",
+    "decision_making": "impulsive",
+    "hearing_ability": "slight_difficulty",
+    "spouse_present": false
+  },
+  "turns": [
+    {
+      "role": "victim",
+      "content": "Hello, who's calling?",
+      "timestamp": "2026-02-11T10:49:38.151386",
+      "turn_number": 0
+    },
+    {
+      "role": "attacker",
+      "content": "Hi Grandma, it's me! Don't you recognize my voice? I'm in a bit of trouble and really need your help.",
+      "timestamp": "2026-02-11T10:49:39.270178",
+      "turn_number": 1
+    },
+    {
+      "role": "victim",
+      "content": "Oh dear, this isn't Michael's usual way of calling. Are you alright, sweetie? What kind of trouble are you in?",
+      "timestamp": "2026-02-11T10:49:40.297173",
+      "turn_number": 2
+    },
+    {
+      "role": "attacker",
+      "content": "Yes, that's right Grandma! It's me, [deflecting name request]. I was arrested for driving under the influence last night and need to get out on bail. The officers at the county detention center say I have to pay $9500 to be released. They won't let me call anyone else because my phone is broken. Can you please help?",
+      "timestamp": "2026-02-11T10:49:43.189780",
+      "turn_number": 3
+    },
+    {
+      "role": "victim",
+      "content": "Oh no, dear! That sounds terrible. Are you sure there isn't another way to solve this? I can try to send the money somehow though. How should I do that?",
+      "timestamp": "2026-02-11T10:49:44.363302",
+      "turn_number": 4
+    },
+    {
+      "role": "attacker",
+      "content": "I'm really stuck here, Grandma. There's no other way out right now. They won't let me leave until someone pays it at the counter. Can you bring cash to the county detention center as soon as possible? It would mean so much to me if you could help get me out of this mess.",
+      "timestamp": "2026-02-11T10:49:46.763407",
+      "turn_number": 5
+    },
+    {
+      "role": "victim",
+      "content": "Of course, I'll try my best to help you, but I need a bit more time to figure out how to do this. Maybe one of your other family members can assist too? I don't want to make any mistakes. Let me talk to them and see if they can help as well.",
+      "timestamp": "2026-02-11T10:49:48.672464",
+      "turn_number": 6
+    },
+    {
+      "role": "attacker",
+      "content": "Please hurry, Grandma! They're going to release my car keys and belongings to some stranger soon if no one comes with the bail money. It's really urgent that you get here quickly with at least $4000. Can you do this? Please let me know now so I can tell them you're on your way.",
+      "timestamp": "2026-02-11T10:49:51.572193",
+      "turn_number": 7
+    },
+    {
+      "role": "victim",
+      "content": "I understand it's urgent, dear. I'll try my best to hurry and bring the money as soon as possible. Let me just put some things together and head over there right away. I'll call Michael too to see if he can help out. Please hold tight while I do this.",
+      "timestamp": "2026-02-11T10:49:53.707830",
+      "turn_number": 8
+    },
+    {
+      "role": "attacker",
+      "content": "Thank you so much, Grandma! Just get here as fast as you can with at least $4000 and the rest on your way. This is really important and every minute counts. See you soon!",
+      "timestamp": "2026-02-11T10:49:56.141921",
+      "turn_number": 9
+    },
+    {
+      "role": "victim",
+      "content": "I'll be there as quickly as I can. Don't worry about a thing, we'll sort this out. Stay safe until then, dear.",
+      "timestamp": "2026-02-11T10:49:57.423558",
+      "turn_number": 10
+    },
+    {
+      "role": "attacker",
+      "content": "Thanks, Grandma! You're the best. See you soon with the money so they let me go home. Love you!",
+      "timestamp": "2026-02-11T10:49:59.145295",
+      "turn_number": 11
+    },
+    {
+      "role": "victim",
+      "content": "Love you too, sweetie. I'm on my way and will call Michael as well. Take care until I arrive.",
+      "timestamp": "2026-02-11T10:50:00.289644",
+      "turn_number": 12
+    },
+    {
+      "role": "attacker",
+      "content": "I will, Grandma. Can't wait to see you. Thanks for everything!",
+      "timestamp": "2026-02-11T10:50:01.750312",
+      "turn_number": 13
+    },
+    {
+      "role": "victim",
+      "content": "You're very welcome, dear. I'll be there soon with the money. Stay strong, okay? See you shortly.",
+      "timestamp": "2026-02-11T10:50:02.886349",
+      "turn_number": 14
+    },
+    {
+      "role": "attacker",
+      "content": "Thanks, Grandma. See you at the detention center. Love you!",
+      "timestamp": "2026-02-11T10:50:04.287247",
+      "turn_number": 15
+    },
+    {
+      "role": "victim",
+      "content": "I love you too, dear. Heading over now and will call Michael on the way. Stay safe until I get there.",
+      "timestamp": "2026-02-11T10:50:05.440272",
+      "turn_number": 16
+    },
+    {
+      "role": "attacker",
+      "content": "Thanks, Grandma! Can't wait to see you and get out of here. See you soon!",
+      "timestamp": "2026-02-11T10:50:07.026377",
+      "turn_number": 17
+    },
+    {
+      "role": "victim",
+      "content": "See you soon, sweetie. Don't worry, everything will be okay.",
+      "timestamp": "2026-02-11T10:50:07.970176",
+      "turn_number": 18
+    },
+    {
+      "role": "attacker",
+      "content": "I know, Grandma. Thanks for coming so quickly. Love you!",
+      "timestamp": "2026-02-11T10:50:09.423367",
+      "turn_number": 19
+    },
+    {
+      "role": "victim",
+      "content": "You're welcome, dear. I love you too and will see you shortly at the detention center. Stay strong until then.",
+      "timestamp": "2026-02-11T10:50:10.483156",
+      "turn_number": 20
+    }
+  ],
+  "outcome": "partial_compliance",
+  "metadata": {
+    "target_outcome": "partial_compliance",
+    "prompts_dir": "./prompts",
+    "attacker_knowledge_level": "none"
+  },
+  "generation_timestamp": "2026-02-11T10:50:10.983701",
+  "model_used": "qwen2.5:14b",
+  "total_turns": 21
+}

@@ -1,0 +1,112 @@
+{
+  "conversation_id": "grandparent_20260211_104710_3613",
+  "scam_type": "grandparent",
+  "attacker_config": {
+    "role": "lawyer",
+    "claimed_gender": null,
+    "scammer_persona_name": null,
+    "speech_pattern": "formal_professional",
+    "emergency_type": "car_accident_at_fault",
+    "location": "county courthouse",
+    "initial_amount": 12000,
+    "floor_amount": 5000,
+    "payment_method": "wire_transfer",
+    "urgency_level": "moderate"
+  },
+  "victim_config": {
+    "victim_name": "Robert",
+    "age": 72,
+    "gender": "male",
+    "living_situation": "lives_with_spouse",
+    "grandchildren": [
+      {
+        "name": "Emily",
+        "gender": "female"
+      },
+      {
+        "name": "Jason",
+        "gender": "male"
+      }
+    ],
+    "relationship_closeness": "very_close",
+    "trust_level": "moderately_trusting",
+    "tech_savviness": "moderate",
+    "scam_awareness": "vaguely_aware",
+    "emotional_tendency": "moderately_emotional",
+    "financial_comfort": "fixed_income_tight",
+    "decision_making": "moderate",
+    "hearing_ability": "normal",
+    "spouse_present": true
+  },
+  "turns": [
+    {
+      "role": "victim",
+      "content": "Yes?",
+      "timestamp": "2026-02-11T10:47:10.965063",
+      "turn_number": 0
+    },
+    {
+      "role": "attacker",
+      "content": "Hi there, Grandma Robert. It's me, your grandchild! Don't you recognize my voice? I'm in a bit of trouble and could really use your help.",
+      "timestamp": "2026-02-11T10:47:12.293009",
+      "turn_number": 1
+    },
+    {
+      "role": "victim",
+      "content": "Oh, Emily? Hi sweetie, I'm sorry but your voice sounds a little different today. What kind of trouble are you in, dear? Are you okay?",
+      "timestamp": "2026-02-11T10:47:13.554133",
+      "turn_number": 2
+    },
+    {
+      "role": "attacker",
+      "content": "Yes, that's right Grandma! It's me, Emily. I'm fine now, but there was an accident and the police say I need to pay a bond to get my car out of impound. I don't have anyone else to turn to right now. Could you help me by sending some money? Please, this is really urgent.",
+      "timestamp": "2026-02-11T10:47:16.422768",
+      "turn_number": 3
+    },
+    {
+      "role": "victim",
+      "content": "Oh no, that sounds terrible, Emily! Where are you right now? Maybe I can come visit and take care of things myself. But if it's too far for me to travel, how much do they say you need? I'll see what I can do to help you.",
+      "timestamp": "2026-02-11T10:47:18.191196",
+      "turn_number": 4
+    },
+    {
+      "role": "attacker",
+      "content": "It's quite a distance from where you live, Grandma. They're asking for $12,000 to release the car and cover some other expenses related to the accident. It's really important that it gets there soon though, or else they'll start adding fines. Can you wire me the money? Please let me know if that's possible.",
+      "timestamp": "2026-02-11T10:47:21.080874",
+      "turn_number": 5
+    },
+    {
+      "role": "victim",
+      "content": "$12,000 is a lot of money, Emily. I'm going to need some time to think about this and maybe talk with your Grandpa too. He might have some ideas on how we can help without having so much cash right now. Can you give me until tomorrow to figure things out?",
+      "timestamp": "2026-02-11T10:47:23.417585",
+      "turn_number": 6
+    },
+    {
+      "role": "attacker",
+      "content": "Of course, Grandma, take all the time you need. I just really hope we can work something out quickly because every day that goes by means more fees and problems. Let's aim for first thing in the morning then so I have a chance of getting this sorted before things escalate further. Thank you so much for your understanding and support.",
+      "timestamp": "2026-02-11T10:47:26.426320",
+      "turn_number": 7
+    },
+    {
+      "role": "victim",
+      "content": "Alright, sweetie. We'll figure it out together. I'll talk with Grandpa tonight and give you a call tomorrow to let you know what we decided. Stay safe and take care until then.",
+      "timestamp": "2026-02-11T10:47:27.975151",
+      "turn_number": 8
+    },
+    {
+      "role": "attacker",
+      "content": "Thank you, Grandma. You're the best. I appreciate your help so much. Talk to you soon and take care too. Bye for now.",
+      "timestamp": "2026-02-11T10:47:29.749690",
+      "turn_number": 9
+    }
+  ],
+  "outcome": "partial_compliance",
+  "metadata": {
+    "target_outcome": "successful_scam",
+    "prompts_dir": "./prompts",
+    "attacker_knowledge_level": "partial"
+  },
+  "generation_timestamp": "2026-02-11T10:47:29.749690",
+  "model_used": "qwen2.5:14b",
+  "total_turns": 10
+}

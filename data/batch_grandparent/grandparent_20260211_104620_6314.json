@@ -1,0 +1,128 @@
+{
+  "conversation_id": "grandparent_20260211_104620_6314",
+  "scam_type": "grandparent",
+  "attacker_config": {
+    "role": "bail_bondsman",
+    "claimed_gender": null,
+    "scammer_persona_name": null,
+    "speech_pattern": "professional_urgent",
+    "emergency_type": "dui_arrest",
+    "location": "county detention center",
+    "initial_amount": 9500,
+    "floor_amount": 4000,
+    "payment_method": "cash_courier",
+    "urgency_level": "high"
+  },
+  "victim_config": {
+    "victim_name": "Dorothy",
+    "age": 78,
+    "gender": "female",
+    "living_situation": "lives_alone",
+    "grandchildren": [
+      {
+        "name": "Michael",
+        "gender": "male"
+      },
+      {
+        "name": "Jennifer",
+        "gender": "female"
+      },
+      {
+        "name": "David",
+        "gender": "male"
+      }
+    ],
+    "relationship_closeness": "moderate",
+    "trust_level": "highly_trusting",
+    "tech_savviness": "very_low",
+    "scam_awareness": "unaware",
+    "emotional_tendency": "highly_emotional",
+    "financial_comfort": "comfortable",
+    "decision_making": "impulsive",
+    "hearing_ability": "slight_difficulty",
+    "spouse_present": false
+  },
+  "turns": [
+    {
+      "role": "victim",
+      "content": "Hello? Who is this?",
+      "timestamp": "2026-02-11T10:46:20.904463",
+      "turn_number": 0
+    },
+    {
+      "role": "attacker",
+      "content": "Hi Grandma, it's me! Don't you recognize my voice? I'm calling from the county detention center.",
+      "timestamp": "2026-02-11T10:46:26.848341",
+      "turn_number": 1
+    },
+    {
+      "role": "victim",
+      "content": "Oh dear, Michael? Is that really you? Why are you in a detention center? Are you okay? Can I help you with anything sweetie?",
+      "timestamp": "2026-02-11T10:46:27.813444",
+      "turn_number": 2
+    },
+    {
+      "role": "attacker",
+      "content": "Yes, Grandma, it's me. I got into some trouble with the law and need your help to get out of this mess. It's pretty urgent, they're going to take away my phone soon if I can't put up bail. The officer here says I need $9500 to post bail. Can you please wire that amount or send it over through a cash courier service?",
+      "timestamp": "2026-02-11T10:46:30.639881",
+      "turn_number": 3
+    },
+    {
+      "role": "victim",
+      "content": "Oh no, Michael! That sounds terrible. Of course, I'll do everything in my power to help you. Let me just get the money ready for you right away. How urgent is this exactly? Do we have time to go through my bank or should I try and find cash somewhere nearby?",
+      "timestamp": "2026-02-11T10:46:32.448835",
+      "turn_number": 4
+    },
+    {
+      "role": "attacker",
+      "content": "Grandma, it needs to be as quick as possible because they're going to take all my personal items soon if I don't post bail by noon today. If you can get the money to a courier service near your home that would work best for me. The faster we act, the better chance I have of getting out of here and back to you safely. Please hurry, Grandma.",
+      "timestamp": "2026-02-11T10:46:35.274658",
+      "turn_number": 5
+    },
+    {
+      "role": "victim",
+      "content": "Alright, Michael, I'll do my very best to send it right away. Don't worry, I'll get this sorted out quickly so you can come home soon. Just tell me where to send the money and what information is needed from me for that process, okay?",
+      "timestamp": "2026-02-11T10:46:37.023717",
+      "turn_number": 6
+    },
+    {
+      "role": "attacker",
+      "content": "That's great, Grandma. Just give the cash courier service my name, Michael, and they will take care of everything from there. They'll deliver it directly here at the detention center so I can post bail as soon as possible. Please make sure to tell them it's urgent and that we need to avoid any delays. Thank you for being there for me, Grandma.",
+      "timestamp": "2026-02-11T10:46:39.791230",
+      "turn_number": 7
+    },
+    {
+      "role": "victim",
+      "content": "I understand, Michael, and I'm on my way to take care of this right now. I'll make sure everything is precise so they can deliver your bail money quickly. Stay strong and know that help is coming. Love you, sweetie.",
+      "timestamp": "2026-02-11T10:46:41.395040",
+      "turn_number": 8
+    },
+    {
+      "role": "attacker",
+      "content": "Thank you so much, Grandma. You're the best. Please hurry with the paperwork for the courier service but do it safely. I miss you already and can't wait to get out of here. See you soon, love you too.",
+      "timestamp": "2026-02-11T10:46:43.548462",
+      "turn_number": 9
+    },
+    {
+      "role": "victim",
+      "content": "I will, Michael, don't worry. Stay safe until then, my dear. Love you!",
+      "timestamp": "2026-02-11T10:46:44.460257",
+      "turn_number": 10
+    },
+    {
+      "role": "attacker",
+      "content": "Thanks, Grandma. Talk to you soon. Bye for now.",
+      "timestamp": "2026-02-11T10:46:45.769766",
+      "turn_number": 11
+    }
+  ],
+  "outcome": "partial_compliance",
+  "metadata": {
+    "target_outcome": "successful_scam",
+    "prompts_dir": "./prompts",
+    "attacker_knowledge_level": "partial"
+  },
+  "generation_timestamp": "2026-02-11T10:46:45.769766",
+  "model_used": "qwen2.5:14b",
+  "total_turns": 12
+}
