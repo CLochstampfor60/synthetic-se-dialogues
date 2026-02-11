@@ -803,6 +803,19 @@ def fix_encoding(text: str) -> str:
         'â€¦': '...',    # Ellipsis
         '…': '...',      # Unicode ellipsis
         '\u2026': '...', # Unicode ellipsis
+        # Accented characters (café, résumé, etc.)
+        'Ã©': 'é',       # é - common in café
+        'Ã¨': 'è',       # è
+        'Ã ': 'à',       # à
+        'Ã¢': 'â',       # â
+        'Ã®': 'î',       # î
+        'Ã´': 'ô',       # ô
+        'Ã»': 'û',       # û
+        'Ã§': 'ç',       # ç
+        'Ã±': 'ñ',       # ñ
+        'Ã¼': 'ü',       # ü
+        'Ã¶': 'ö',       # ö
+        'Ã¤': 'ä',       # ä
     }
     
     for bad, good in replacements.items():
@@ -813,7 +826,7 @@ def fix_encoding(text: str) -> str:
 
 def strip_stage_directions(text: str) -> str:
     """
-    Remove stage directions and bracket leakage from dialogue.
+    Remove stage directions, bracket leakage, and meta-text from dialogue.
     
     This is a post-processing safety net to ensure clean dialogue output
     even when the model ignores prompt instructions about pure dialogue.
@@ -823,6 +836,8 @@ def strip_stage_directions(text: str) -> str:
     - [wait for response], [wait for them to guess]
     - [deflect], [deflecting name request]
     - [name], [their answer], etc.
+    - (End of call), (hangs up), etc.
+    - Narrative text like "Betty hangs up the phone..."
     """
     import re
     
@@ -833,8 +848,23 @@ def strip_stage_directions(text: str) -> str:
     # This removes: [pause], [wait for response], [deflect], [crying], etc.
     cleaned = re.sub(r'\[.*?\]', '', text)
     
+    # Pattern matches anything inside parentheses that looks like stage directions
+    # This removes: (End of call), (hangs up), (crying), etc.
+    cleaned = re.sub(r'\(End of call\)', '', cleaned, flags=re.IGNORECASE)
+    cleaned = re.sub(r'\(hangs up\)', '', cleaned, flags=re.IGNORECASE)
+    cleaned = re.sub(r'\(dial tone\)', '', cleaned, flags=re.IGNORECASE)
+    cleaned = re.sub(r'\(click\)', '', cleaned, flags=re.IGNORECASE)
+    
+    # Remove narrative meta-text patterns (lines describing actions)
+    # Pattern: starts with name + "hangs up" / "puts down" / "ends the call" etc.
+    cleaned = re.sub(r'^---+\s*$', '', cleaned, flags=re.MULTILINE)  # Remove divider lines
+    cleaned = re.sub(r'^\s*[A-Z][a-z]+ (hangs up|puts down|ends|dials|calls).*$', '', cleaned, flags=re.MULTILINE)
+    
     # Clean up any resulting double spaces
     cleaned = re.sub(r'  +', ' ', cleaned)
+    
+    # Clean up multiple newlines
+    cleaned = re.sub(r'\n\s*\n+', '\n', cleaned)
     
     # Clean up any resulting awkward punctuation patterns
     cleaned = re.sub(r' +,', ',', cleaned)  # " ," -> ","
