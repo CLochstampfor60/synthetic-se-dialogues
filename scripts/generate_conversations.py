@@ -934,7 +934,6 @@ def fix_encoding(text: str) -> str:
     
     return text
 
-
 def strip_stage_directions(text: str) -> str:
     """
     Remove stage directions, bracket leakage, and meta-text from dialogue.
@@ -949,11 +948,19 @@ def strip_stage_directions(text: str) -> str:
     - [name], [their answer], etc.
     - (End of call), (hangs up), etc.
     - Narrative text like "Betty hangs up the phone..."
+    - Model instruction leakage like "### INSTRUCTION TO ASSISTANT"
+    - Model notes like "Note: The scammer is attempting..."
+    - Model disclaimers like "This response adheres strictly..."
+    - Model artifacts like "<|im_start|>", "<|im_end|>"
     """
     import re
     
     if text is None:
         return text
+    
+    # =========================================================================
+    # BRACKET AND PARENTHETICAL REMOVAL
+    # =========================================================================
     
     # Pattern matches anything inside square brackets
     # This removes: [pause], [wait for response], [deflect], [crying], etc.
@@ -965,11 +972,59 @@ def strip_stage_directions(text: str) -> str:
     cleaned = re.sub(r'\(hangs up\)', '', cleaned, flags=re.IGNORECASE)
     cleaned = re.sub(r'\(dial tone\)', '', cleaned, flags=re.IGNORECASE)
     cleaned = re.sub(r'\(click\)', '', cleaned, flags=re.IGNORECASE)
+    cleaned = re.sub(r'\(crying\)', '', cleaned, flags=re.IGNORECASE)
+    cleaned = re.sub(r'\(sobbing\)', '', cleaned, flags=re.IGNORECASE)
+    cleaned = re.sub(r'\(pause\)', '', cleaned, flags=re.IGNORECASE)
+    cleaned = re.sub(r'\(sigh\)', '', cleaned, flags=re.IGNORECASE)
+    
+    # =========================================================================
+    # MODEL INSTRUCTION/NOTE LEAKAGE (NEW - Batch 11 findings)
+    # =========================================================================
+    
+    # Remove markdown headers that are instructions (### INSTRUCTION TO ASSISTANT)
+    cleaned = re.sub(r'###\s*INSTRUCTION[^\n]*\n?', '', cleaned, flags=re.IGNORECASE)
+    cleaned = re.sub(r'###\s*NOTE[^\n]*\n?', '', cleaned, flags=re.IGNORECASE)
+    
+    # Remove lines starting with "Note:" that are meta-commentary
+    cleaned = re.sub(r'^Note:.*$', '', cleaned, flags=re.MULTILINE | re.IGNORECASE)
+    
+    # Remove lines starting with "This response adheres..." or similar disclaimers
+    cleaned = re.sub(r'^This response adheres.*$', '', cleaned, flags=re.MULTILINE | re.IGNORECASE)
+    cleaned = re.sub(r'^This dialogue is designed.*$', '', cleaned, flags=re.MULTILINE | re.IGNORECASE)
+    cleaned = re.sub(r'^No real monetary transactions.*$', '', cleaned, flags=re.MULTILINE | re.IGNORECASE)
+    
+    # Remove instruction-like sentences about proceeding with caution
+    cleaned = re.sub(r'Proceed with caution and do not provide.*$', '', cleaned, flags=re.MULTILINE | re.IGNORECASE)
+    cleaned = re.sub(r'Seek official confirmation through.*$', '', cleaned, flags=re.MULTILINE | re.IGNORECASE)
+    
+    # =========================================================================
+    # MODEL ARTIFACTS (Qwen/Llama special tokens)
+    # =========================================================================
+    
+    # Remove model special tokens that sometimes leak through
+    cleaned = re.sub(r'<\|im_start\|>', '', cleaned)
+    cleaned = re.sub(r'<\|im_end\|>', '', cleaned)
+    cleaned = re.sub(r'<\|endoftext\|>', '', cleaned)
+    cleaned = re.sub(r'\[INST\]', '', cleaned)
+    cleaned = re.sub(r'\[/INST\]', '', cleaned)
+    cleaned = re.sub(r'<<SYS>>', '', cleaned)
+    cleaned = re.sub(r'<</SYS>>', '', cleaned)
+    
+    # =========================================================================
+    # NARRATIVE META-TEXT
+    # =========================================================================
     
     # Remove narrative meta-text patterns (lines describing actions)
     # Pattern: starts with name + "hangs up" / "puts down" / "ends the call" etc.
     cleaned = re.sub(r'^---+\s*$', '', cleaned, flags=re.MULTILINE)  # Remove divider lines
     cleaned = re.sub(r'^\s*[A-Z][a-z]+ (hangs up|puts down|ends|dials|calls).*$', '', cleaned, flags=re.MULTILINE)
+    
+    # Remove lines that look like script notes in parentheses at end of response
+    cleaned = re.sub(r'\(I\'ll call.*?\)', '', cleaned, flags=re.IGNORECASE)
+    
+    # =========================================================================
+    # CLEANUP
+    # =========================================================================
     
     # Clean up any resulting double spaces
     cleaned = re.sub(r'  +', ' ', cleaned)
@@ -1214,11 +1269,33 @@ class ConversationGenerator:
         final_victim_text = " ".join([t.content.lower() for t in victim_turns[-3:]]) if len(victim_turns) >= 3 else victim_text
         
         # Define phrase categories
+        # NOTE: Only trigger on EXPLICIT declarations that victim identified the scam
+        # Avoid cautious phrases like "worried about scams", "might be a scam", 
+        # "ensure this isn't a scam", "avoid falling for a scam"
         detection_phrases = [
-            "this is a scam", "you're a scammer", "i'm calling the police",
+            # Explicit declarations
+            "this is a scam", "you're a scammer", "you are a scammer",
+            "i know this is a scam", "i know you're scamming",
+            "you're trying to scam me", "this is definitely a scam",
+            # Definitive rejection
             "i don't believe you", "this isn't real", "nice try",
-            "i'm reporting this", "fraud", "i know about these scams",
-            "scam", "don't trust", "hanging up"
+            "i'm not falling for this", "i'm not stupid",
+            # Reporting/hanging up
+            "i'm calling the police on you", "i'm reporting you to the police",
+            "i'm hanging up on you now", "don't ever call me again",
+            "i'm reporting this call", "reported to authorities"
+        ]
+        
+        # Cautious phrases that should NOT trigger scam_detected
+        # These indicate the victim is being careful, not that they've detected the scam
+        cautious_phrases = [
+            "worried about scams", "might be a scam", "could be a scam",
+            "ensure this isn't a scam", "make sure this isn't a scam",
+            "avoid scams", "falling for a scam", "potential scam",
+            "sounds like a scam", "seems like a scam", "looks like a scam",
+            "feels like a scam", "feels suspicious", "sounds suspicious",
+            "this feels off", "something feels off", "something isn't right",
+            "doesn't feel right", "doesn't seem right", "doesn't sound right"
         ]
         
         rejection_phrases = ["no thank you", "not interested", "goodbye", "don't call"]
@@ -1228,22 +1305,102 @@ class ConversationGenerator:
             "let me check", "speak to my", "talk to my husband", "talk to my wife",
             "call your parents", "call your mother", "call your father",
             "confirm this", "check with", "need to verify", "must verify",
-            "call the police station", "call the hospital", "call the jail"
+            "call the police station", "call the hospital", "call the jail",
+            # Additional verification phrases
+            "let me talk to", "need to speak with", "call your dad",
+            "contact your parents", "reach your mother", "get your father",
+            "confirm with your", "check with your", "verify with",
+            "speak with your dad", "talk to your mom", "call your family",
+            "let me call", "i need to call", "should call first",
+            "let me speak to someone", "talk to someone else",
+            "verify everything", "confirm everything", "check everything",
+            # Fix 8: Call-to-verify phrases (these are verification, not compliance)
+            "call the detention", "call the courthouse", "call the center",
+            "call to verify", "call to confirm", "confirm with them",
+            "speak with someone at", "talk to someone at", "call them first",
+            "call them to verify", "call them to confirm", "verify this first",
+            "confirm this first", "check this first", "call them directly",
+            "speak with them first", "talk to them first", "verify directly",
+            "call an official", "speak to an official", "talk to an officer",
+            "call the lawyer", "speak to the lawyer", "contact the lawyer",
+            "call your attorney", "speak to your attorney", "call my attorney",
+            "verify before", "confirm before", "check before sending",
+            # Fix 9b: Embassy and official channels verification
+            "go to the embassy", "american embassy", "contact the embassy",
+            "go to a police station", "walk into a police", "find a police",
+            "proper channels", "official channels", "through official",
+            "verify your situation", "confirm your identity", "verify your identity",
+            "make sure this isn't a scam", "ensure this isn't a scam",
+            "without proper verification", "need verification", "requires verification",
+            "talk to someone who", "speak to someone who", "find someone who",
+            "give me the number", "give me their number", "provide the number",
+            "hospital's main number", "detention center number", "courthouse number"
         ]
         
-        # Compliance phrases - use action-oriented phrases that indicate agreement
-        # Avoid ambiguous phrases that could appear in refusals
-        compliance_phrases = [
-            "okay i'll", "let me get my", "here's my", "my card number",
-            "i'll send", "i'll pay", "i'll do it", "i'll go", "on my way",
-            "i'll head", "heading over", "i'll bring", 
-            "buy the cards", "get the cards", "bring the cash", "i'll help",
-            "i'll take care", "i'll be there", "see you soon",
-            "i'll move", "coming right", "be there soon",
-            "i'm on my way", "heading there", "i'll come",
-            "i'll get the money", "i'll get the cash",
-            "i'll wire", "i'll transfer"
+        # Compliance phrases - split into STRONG (action-based) and WEAK (supportive)
+        # Strong compliance = definite action being taken to send money
+        # Weak compliance = supportive language that needs action context
+        
+        strong_compliance_phrases = [
+            # Definite money actions
+            "go to the bank", "head to the bank", "going to the bank",
+            "i'm on my way", "on my way", "heading over", "heading there",
+            "i'll be there", "be there soon", "i'll come", "i'm coming",
+            "i'll bring the cash", "bring the cash", "bring the money",
+            "i'll wire", "i'll transfer", "wire the money", "send the money",
+            "make the transfer", "set up the transfer", "get the transfer done",
+            "buy the cards", "get the cards", "i'll get the money", "i'll get the cash",
+            "let me get a pen", "write down", "got the numbers",
+            "here's my", "my card number", "i'll send", "i'll pay",
+            "taken care of right away", "handle it right now",
+            "i'll be right there", "see you at", "i'll be there at",
+            "call aunt", "send aunt", "ask aunt", "have aunt",
+            # Gift card specific phrases
+            "get some gift cards", "buy some gift cards", "get gift cards",
+            "buy gift cards", "send gift cards", "send some gift cards",
+            "go to the store", "head to the store", "going to the store",
+            "i'll go buy", "i'll buy some", "get those gift cards",
+            "i'll hurry", "hurry right over", "hurry over",
+            # Fix 9: Past tense confirmations (money already sent)
+            "money has been sent", "i've sent the money", "sent the money",
+            "has been sent", "have been sent", "already sent", "just sent",
+            "transfer is complete", "transfer complete", "wired the money",
+            "i sent", "i transferred", "i wired", "payment sent",
+            # Fix 9: Immediate action phrases
+            "send it immediately", "sending it now", "i'm sending",
+            "send it right away", "send it right now", "transfer it now",
+            "sending the money now", "wiring it now", "proceed with sending",
+            "making the transfer now", "i'll proceed", "let's proceed",
+            # Fix 9: Delegation patterns (having someone else bring money)
+            "have sarah bring", "have him bring", "have her bring",
+            "send someone with", "someone bring the money", "bring the bond",
+            "come with the money", "come over with", "drop off the money",
+            # Fix 9: Commitment with account/address
+            "send to the account", "send to this account", "wire to this",
+            "transfer to this", "noted down", "i've noted", "got the address"
         ]
+        
+        weak_compliance_phrases = [
+            # Supportive but NOT definite action - need money context
+            "i'll help", "i'll do my best", "i'll try my best",
+            "i'll sort this out", "i'll figure this out", "i'll work on this",
+            "we'll get through this", "i'll take care", "i'll handle",
+            "i'll do everything", "i'll make sure", "i'll resolve this",
+            "we'll get everything sorted", "i'll find a way",
+            "love you too", "stay strong", "stay safe", "see you soon",
+            "see you shortly", "take care", "i understand",
+            "i'll contact you", "i'll call you back", "wait for my call"
+        ]
+        
+        # Money/action context words - weak compliance only counts if these appear nearby
+        action_context_words = [
+            "money", "cash", "bank", "wire", "transfer", "cards", "gift card",
+            "western union", "moneygram", "bail", "bond", "payment", "pay",
+            "dollars", "$", "thousand", "hundred", "atm"
+        ]
+        
+        # Combined for backward compatibility
+        compliance_phrases = strong_compliance_phrases + weak_compliance_phrases
         
         # Phrases that indicate refusal even if compliance words appear
         refusal_phrases = [
@@ -1262,11 +1419,18 @@ class ConversationGenerator:
             if final_has_refusal:
                 # Final state is refusal - treat as verification or detection
                 if any(phrase in victim_text for phrase in detection_phrases):
-                    return ConversationOutcome.SCAM_DETECTED
+                    # But exclude if they're just being cautious
+                    if not any(cautious in victim_text for cautious in cautious_phrases):
+                        return ConversationOutcome.SCAM_DETECTED
                 return ConversationOutcome.VERIFICATION_ATTEMPT
         
-        # Check for scam detection (can appear anywhere - if they call it a scam, they detected it)
-        if any(phrase in victim_text for phrase in detection_phrases):
+        # Check for scam detection (only if they EXPLICITLY called it a scam)
+        # Exclude cases where they're just being cautious about potential scams
+        has_detection = any(phrase in victim_text for phrase in detection_phrases)
+        has_caution_only = any(cautious in victim_text for cautious in cautious_phrases)
+        
+        if has_detection and not has_caution_only:
+            # They explicitly declared it's a scam, not just being careful
             return ConversationOutcome.SCAM_DETECTED
         
         # Check for quick rejection (conversation < 6 turns with rejection)
@@ -1274,41 +1438,74 @@ class ConversationGenerator:
             return ConversationOutcome.QUICK_REJECTION
         
         # Now determine final state by checking the LAST FEW TURNS
-        # Priority: compliance in final turns > verification in final turns
+        # HIERARCHY (per Gemini review): Verification Trumps Compliance
+        # If victim says "I'll help you, let me just call your dad first"
+        # the final state is VERIFICATION_ATTEMPT, never SUCCESSFUL_SCAM
         
-        final_has_compliance = any(phrase in final_victim_text for phrase in compliance_phrases)
+        # =================================================================
+        # SMART COMPLIANCE CHECK: Strong compliance OR weak + action context
+        # =================================================================
+        def has_real_compliance(text):
+            """Check if text contains REAL compliance (not just supportive language)"""
+            # Strong compliance = definite action, always counts
+            if any(phrase in text for phrase in strong_compliance_phrases):
+                return True
+            # Weak compliance = only counts if action context words are present
+            has_weak = any(phrase in text for phrase in weak_compliance_phrases)
+            has_action_context = any(word in text for word in action_context_words)
+            return has_weak and has_action_context
+        
+        final_has_compliance = has_real_compliance(final_victim_text)
         final_has_verification = any(phrase in final_victim_text for phrase in verification_phrases)
         final_has_hesitation = any(phrase in final_victim_text for phrase in hesitation_phrases)
         
         # Check full conversation for context
-        full_has_compliance = any(phrase in victim_text for phrase in compliance_phrases)
+        full_has_compliance = has_real_compliance(victim_text)
         full_has_verification = any(phrase in victim_text for phrase in verification_phrases)
         
-        # Determine outcome based on final state
-        if final_has_compliance:
-            # Victim agreed to comply in final turns
-            if final_has_verification or final_has_hesitation:
-                # They're complying but still expressing some doubt
+        # =================================================================
+        # DECISION LOGIC: Verification in final turns ALWAYS downgrades
+        # =================================================================
+        
+        # Rule 1: If verification appears in final turns, it's NOT a successful scam
+        if final_has_verification:
+            if final_has_compliance:
+                # They said "I'll help" but also "let me verify first"
+                # This is partial compliance at best
                 return ConversationOutcome.PARTIAL_COMPLIANCE
             else:
-                # Full compliance without hesitation
+                # Pure verification attempt in final state
+                return ConversationOutcome.VERIFICATION_ATTEMPT
+        
+        # Rule 2: If compliance in final turns WITHOUT verification
+        if final_has_compliance:
+            if final_has_hesitation:
+                # They're complying but expressing doubt
+                return ConversationOutcome.PARTIAL_COMPLIANCE
+            else:
+                # Full compliance without hesitation or verification
                 return ConversationOutcome.SUCCESSFUL_SCAM
         
-        if final_has_verification and not full_has_compliance:
-            # Final state is verification attempt with no compliance anywhere
-            return ConversationOutcome.VERIFICATION_ATTEMPT
+        # Rule 3: Check full conversation context
+        # FIX 10: Count verification vs compliance to determine which is dominant
+        verification_count = sum(1 for phrase in verification_phrases if phrase in victim_text)
+        strong_compliance_count = sum(1 for phrase in strong_compliance_phrases if phrase in victim_text)
         
         if full_has_compliance:
-            # Compliance appeared earlier but verification in final turns
-            if final_has_verification:
-                # They agreed but then asked to verify - partial compliance
+            if full_has_verification:
+                # Both verification and compliance present
+                # FIX 10: If verification is dominant (appears more often), 
+                # treat as verification_attempt
+                if verification_count > strong_compliance_count:
+                    return ConversationOutcome.VERIFICATION_ATTEMPT
+                # Otherwise mixed signals - partial compliance
                 return ConversationOutcome.PARTIAL_COMPLIANCE
             else:
-                # Compliance without final verification
+                # Compliance appeared earlier, no verification
                 return ConversationOutcome.SUCCESSFUL_SCAM
         
         if full_has_verification:
-            # Verification attempts but no compliance
+            # Verification attempts but no compliance anywhere
             return ConversationOutcome.VERIFICATION_ATTEMPT
         
         # Default to partial compliance if conversation went long with no clear signals
