@@ -1,0 +1,17 @@
+# Social Engineering Scam Conversation Generator
+# Requirements file
+
+# LLM API Clients
+anthropic>=0.18.0
+openai>=1.12.0
+
+# Utilities
+python-dotenv>=1.0.0
+tqdm>=4.66.0
+
+# Data processing (for later analysis)
+pandas>=2.0.0
+
+# Optional: For local model inference
+# torch>=2.0.0
+# transformers>=4.36.0
