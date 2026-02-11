@@ -641,12 +641,20 @@ def format_prompt_with_config(template: str, config: Dict[str, Any], scam_type: 
         if not attacker_knows_victim_name or not attacker_knows_grandchild:
             knowledge_context += "\n### CRITICAL INSTRUCTION FOR UNKNOWN INFORMATION:\n"
             knowledge_context += "Since you don't know certain names, you MUST fish for them naturally in dialogue.\n"
-            knowledge_context += "DO NOT use any placeholder text like [name] or [wait for guess] in your responses.\n"
             knowledge_context += "Instead, use these natural techniques:\n"
             knowledge_context += "- Open vaguely: 'Hi Grandma, it's me!' or 'Grandma, it's your grandson/granddaughter!'\n"
             knowledge_context += "- Let THEM guess: Wait for the victim to say a name, then confirm: 'Yes, that's right!'\n"
             knowledge_context += "- If pressed for a name before they guess, deflect: 'It's me, your grandchild! Don't you recognize my voice?'\n"
-            knowledge_context += "- NEVER output bracketed text or instructions in your dialogue.\n"
+        
+        # ALWAYS add anti-bracket instruction for all attacker prompts
+        knowledge_context += "\n### ABSOLUTE OUTPUT RULE:\n"
+        knowledge_context += "Your responses must be PURE DIALOGUE ONLY - exactly what you would say out loud on a phone call.\n"
+        knowledge_context += "FORBIDDEN in your output:\n"
+        knowledge_context += "- Square brackets of any kind: [ ]\n"
+        knowledge_context += "- Stage directions like [pause], [wait], [sigh], [crying]\n"
+        knowledge_context += "- Placeholder text like [name], [wait for response], [their answer]\n"
+        knowledge_context += "- Any meta-commentary or instructions\n"
+        knowledge_context += "If you need to pause or wait, simply end your dialogue turn and let the other person respond.\n"
         
         formatted += knowledge_context
     
