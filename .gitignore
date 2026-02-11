@@ -1,5 +1,26 @@
 # Synthetic SE Dialogues - .gitignore
 
+# Ignore the entire .vscode folder and all its contents by default
+.vscode/
+
+# User-specific folders
+purgatory/*
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.env
+
+# User-specific files (MonoDevelop/Xamarin Studio)
+*.userprefs
+
+# Mono auto generated files
+mono_crash.*
+
+
 # =============================================================================
 # Environment and Secrets
 # =============================================================================
