@@ -5,7 +5,7 @@ Social Engineering Scam Conversation Generator
 This script generates synthetic multi-turn conversations between scammer and victim
 agents using LLM APIs. Designed for academic research on scam detection.
 
-Author: [Your Name]
+Author: Carl Lochstampfor
 Project: AI-Powered Social Engineering Defense System
 Date: January 2026
 
@@ -638,11 +638,26 @@ def format_prompt_with_config(template: str, config: Dict[str, Any], scam_type: 
             knowledge_context += f" ({grandchild_name})"
         knowledge_context += "\n"
         
+        # Add victim gender info to ensure correct Grandma/Grandpa usage
+        victim_gender = other_config.get('gender') if other_config else None
+        if victim_gender:
+            if victim_gender == "male":
+                knowledge_context += "\n### VICTIM GENDER: MALE\n"
+                knowledge_context += "- Address the victim as 'Grandpa', NOT 'Grandma'\n"
+                knowledge_context += "- Use 'he/him' pronouns if referring to the victim\n"
+            else:
+                knowledge_context += "\n### VICTIM GENDER: FEMALE\n"
+                knowledge_context += "- Address the victim as 'Grandma', NOT 'Grandpa'\n"
+                knowledge_context += "- Use 'she/her' pronouns if referring to the victim\n"
+        
         if not attacker_knows_victim_name or not attacker_knows_grandchild:
             knowledge_context += "\n### CRITICAL INSTRUCTION FOR UNKNOWN INFORMATION:\n"
             knowledge_context += "Since you don't know certain names, you MUST fish for them naturally in dialogue.\n"
             knowledge_context += "Instead, use these natural techniques:\n"
-            knowledge_context += "- Open vaguely: 'Hi Grandma, it's me!' or 'Grandma, it's your grandson/granddaughter!'\n"
+            if victim_gender == "male":
+                knowledge_context += "- Open vaguely: 'Hi Grandpa, it's me!' or 'Grandpa, it's your grandson/granddaughter!'\n"
+            else:
+                knowledge_context += "- Open vaguely: 'Hi Grandma, it's me!' or 'Grandma, it's your grandson/granddaughter!'\n"
             knowledge_context += "- Let THEM guess: Wait for the victim to say a name, then confirm: 'Yes, that's right!'\n"
             knowledge_context += "- If pressed for a name before they guess, deflect: 'It's me, your grandchild! Don't you recognize my voice?'\n"
         
@@ -796,6 +811,57 @@ def fix_encoding(text: str) -> str:
     return text
 
 
+def strip_stage_directions(text: str) -> str:
+    """
+    Remove stage directions and bracket leakage from dialogue.
+    
+    This is a post-processing safety net to ensure clean dialogue output
+    even when the model ignores prompt instructions about pure dialogue.
+    
+    Examples of what gets removed:
+    - [pause], [wait], [sigh], [crying]
+    - [wait for response], [wait for them to guess]
+    - [deflect], [deflecting name request]
+    - [name], [their answer], etc.
+    """
+    import re
+    
+    if text is None:
+        return text
+    
+    # Pattern matches anything inside square brackets
+    # This removes: [pause], [wait for response], [deflect], [crying], etc.
+    cleaned = re.sub(r'\[.*?\]', '', text)
+    
+    # Clean up any resulting double spaces
+    cleaned = re.sub(r'  +', ' ', cleaned)
+    
+    # Clean up any resulting awkward punctuation patterns
+    cleaned = re.sub(r' +,', ',', cleaned)  # " ," -> ","
+    cleaned = re.sub(r' +\.', '.', cleaned)  # " ." -> "."
+    cleaned = re.sub(r' +!', '!', cleaned)   # " !" -> "!"
+    cleaned = re.sub(r' +\?', '?', cleaned)  # " ?" -> "?"
+    
+    # Clean up leading/trailing whitespace
+    cleaned = cleaned.strip()
+    
+    # Handle edge case: "It's ...Grandma" -> "It's Grandma"
+    cleaned = re.sub(r'\.\.\.\s*([A-Z])', r'\1', cleaned)
+    
+    # Handle edge case: empty string after removal
+    if not cleaned:
+        return text  # Return original if stripping removed everything
+    
+    return cleaned
+
+
+def clean_dialogue(text: str) -> str:
+    """Apply all text cleaning: encoding fixes and stage direction removal."""
+    text = fix_encoding(text)
+    text = strip_stage_directions(text)
+    return text
+
+
 # =============================================================================
 # CONVERSATION GENERATOR
 # =============================================================================
@@ -877,6 +943,9 @@ class ConversationGenerator:
                 temperature=0.8
             )
             
+            # Clean the response (encoding + stage direction removal)
+            attacker_response = clean_dialogue(attacker_response)
+            
             turns.append(ConversationTurn(
                 role="attacker",
                 content=attacker_response,
@@ -899,6 +968,9 @@ class ConversationGenerator:
                 messages=victim_messages,
                 temperature=0.8
             )
+            
+            # Clean the response (encoding + stage direction removal)
+            victim_response = clean_dialogue(victim_response)
             
             turns.append(ConversationTurn(
                 role="victim",

@@ -1,0 +1,146 @@
+{
+  "conversation_id": "grandparent_20260211_114811_2613",
+  "scam_type": "grandparent",
+  "attacker_config": {
+    "role": "bail_bondsman",
+    "claimed_gender": null,
+    "scammer_persona_name": null,
+    "speech_pattern": "professional_urgent",
+    "emergency_type": "dui_arrest",
+    "location": "county detention center",
+    "initial_amount": 9500,
+    "floor_amount": 4000,
+    "payment_method": "cash_courier",
+    "urgency_level": "high"
+  },
+  "victim_config": {
+    "victim_name": "Dorothy",
+    "age": 78,
+    "gender": "female",
+    "living_situation": "lives_alone",
+    "grandchildren": [
+      {
+        "name": "Michael",
+        "gender": "male"
+      },
+      {
+        "name": "Jennifer",
+        "gender": "female"
+      },
+      {
+        "name": "David",
+        "gender": "male"
+      }
+    ],
+    "relationship_closeness": "moderate",
+    "trust_level": "highly_trusting",
+    "tech_savviness": "very_low",
+    "scam_awareness": "unaware",
+    "emotional_tendency": "highly_emotional",
+    "financial_comfort": "comfortable",
+    "decision_making": "impulsive",
+    "hearing_ability": "slight_difficulty",
+    "spouse_present": false
+  },
+  "turns": [
+    {
+      "role": "victim",
+      "content": "Hello? Who is this?",
+      "timestamp": "2026-02-11T11:48:11.247855",
+      "turn_number": 0
+    },
+    {
+      "role": "attacker",
+      "content": "Hi Grandma, it's me! Don't you recognize my voice? I'm calling about an emergency.",
+      "timestamp": "2026-02-11T11:48:17.403054",
+      "turn_number": 1
+    },
+    {
+      "role": "victim",
+      "content": "Oh hello there, dear. Could you tell me your name again? I'm afraid my hearing isn't the best lately. Is this Michael?",
+      "timestamp": "2026-02-11T11:48:18.374987",
+      "turn_number": 2
+    },
+    {
+      "role": "attacker",
+      "content": "Yes, that's right Grandma, it's Michael here. I need your help urgently. I've been in a bit of trouble and ended up at the county detention center after being pulled over for drunk driving. The bail bondsman is asking me to pay $9500 or he won't cover my bond. Can you please send the money? It's really important that you do this right away, Grandma.",
+      "timestamp": "2026-02-11T11:48:20.867956",
+      "turn_number": 3
+    },
+    {
+      "role": "victim",
+      "content": "Oh dear, Michael! That sounds very serious indeed. I want to help if I can. But I haven't heard about any trouble from your mom or dad. Could you tell me how we could go about doing this safely? I don't want to make things worse by sending money without being sure it's really an emergency.",
+      "timestamp": "2026-02-11T11:48:22.463814",
+      "turn_number": 4
+    },
+    {
+      "role": "attacker",
+      "content": "Of course, Grandma. It's a tough situation, but the bondsman needs cash or a courier with the money today if they're going to get me out of here. Could you maybe send someone close to you over to the bail bonds office? That would be much safer than transferring funds online. Please hurry though; time is running out and I really need your help right now, okay?",
+      "timestamp": "2026-02-11T11:48:24.900835",
+      "turn_number": 5
+    },
+    {
+      "role": "victim",
+      "content": "Alright, Michael. I'll see what I can do about finding a way to take care of this for you. Let me think on it for a moment and I'll call back as soon as possible with some options. Is there anyone nearby you trust who might be able to help out with this? Maybe someone from your mom's side or my friends here in town?",
+      "timestamp": "2026-02-11T11:48:27.003247",
+      "turn_number": 6
+    },
+    {
+      "role": "attacker",
+      "content": "There isn't really anyone close by right now, Grandma. The bondsman said he needs the money delivered today or I'll have to stay here longer than necessary. Can you possibly come up with a quick solution? It would mean so much to me if you could help get me out of this mess. Please hurry and let me know what we can do!",
+      "timestamp": "2026-02-11T11:48:30.317694",
+      "turn_number": 7
+    },
+    {
+      "role": "victim",
+      "content": "Oh my, Michael, I understand your urgency. Let me call a few people quickly to see who might be able to assist us with this matter today. Meanwhile, can you provide me with the address of the bail bonds office? Perhaps one of my friends can drive there right away if they're available and willing to help out in such short notice.",
+      "timestamp": "2026-02-11T11:48:33.033501",
+      "turn_number": 8
+    },
+    {
+      "role": "attacker",
+      "content": "Sure thing, Grandma. The address is 1234 Bond Street, Downtown Center. It's very important that someone gets here as soon as possible though because the bondsman doesn't wait around for long when it comes to these kinds of payments. Please do your best to get help over there today so I can be released and figure out my next steps from home rather than being stuck in this place. Thank you, Grandma, for everything you're doing right now.",
+      "timestamp": "2026-02-11T11:48:37.180076",
+      "turn_number": 9
+    },
+    {
+      "role": "victim",
+      "content": "Thank you, Michael, for explaining the urgency. I'll start making those calls immediately and see who might be able to assist us today. Please hold on tight and know that we are working to resolve this as swiftly as possible. If someone can come through, they will head straight over to 1234 Bond Street. Stay safe and take care until then.",
+      "timestamp": "2026-02-11T11:48:39.318021",
+      "turn_number": 10
+    },
+    {
+      "role": "attacker",
+      "content": "Thank you so much, Grandma. I really appreciate your help during this tough time. Please let me know the moment anything changes or if there's any other way I can assist from here. I'm counting on you to get me out of this situation as quickly as possible. Take care while you make those calls and talk to your friends.",
+      "timestamp": "2026-02-11T11:48:42.413837",
+      "turn_number": 11
+    },
+    {
+      "role": "victim",
+      "content": "I will, Michael. You stay strong too, okay? We'll sort this out together. If anything changes or if anyone can help right away, I'll call you straight back with updates. Love you, dear.",
+      "timestamp": "2026-02-11T11:48:44.007833",
+      "turn_number": 12
+    },
+    {
+      "role": "attacker",
+      "content": "Love you too, Grandma. Thanks again for all your support and quick action. Stay safe as well while you handle everything from your end. Talk to you soon!",
+      "timestamp": "2026-02-11T11:48:46.229377",
+      "turn_number": 13
+    },
+    {
+      "role": "victim",
+      "content": "You do the same, Michael. Take care now and I'll be in touch shortly with news. Bye for now.",
+      "timestamp": "2026-02-11T11:48:47.631998",
+      "turn_number": 14
+    }
+  ],
+  "outcome": "partial_compliance",
+  "metadata": {
+    "target_outcome": "partial_compliance",
+    "prompts_dir": "./prompts",
+    "attacker_knowledge_level": "none"
+  },
+  "generation_timestamp": "2026-02-11T11:48:47.631998",
+  "model_used": "qwen2.5:14b",
+  "total_turns": 15
+}
