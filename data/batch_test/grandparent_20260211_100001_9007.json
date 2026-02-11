@@ -1,0 +1,130 @@
+{
+  "conversation_id": "grandparent_20260211_100001_9007",
+  "scam_type": "grandparent",
+  "attacker_config": {
+    "role": "grandchild",
+    "claimed_gender": "female",
+    "scammer_persona_name": null,
+    "speech_pattern": "distressed_crying",
+    "emergency_type": "car_accident_at_fault",
+    "location": "hospital emergency room",
+    "initial_amount": 6000,
+    "floor_amount": 2500,
+    "payment_method": "gift_cards",
+    "urgency_level": "high"
+  },
+  "victim_config": {
+    "victim_name": "Harold",
+    "age": 81,
+    "gender": "male",
+    "living_situation": "lives_alone",
+    "grandchildren": [
+      {
+        "name": "Sarah",
+        "gender": "female"
+      },
+      {
+        "name": "Matthew",
+        "gender": "male"
+      }
+    ],
+    "relationship_closeness": "moderate",
+    "trust_level": "highly_trusting",
+    "tech_savviness": "very_low",
+    "scam_awareness": "unaware",
+    "emotional_tendency": "highly_emotional",
+    "financial_comfort": "comfortable",
+    "decision_making": "impulsive",
+    "hearing_ability": "significant_difficulty",
+    "spouse_present": false
+  },
+  "turns": [
+    {
+      "role": "victim",
+      "content": "Hello? Who is this?",
+      "timestamp": "2026-02-11T10:00:01.120678",
+      "turn_number": 0
+    },
+    {
+      "role": "attacker",
+      "content": "Hi Grandma, it's me! Can you guess who it is? It's your granddaughter.",
+      "timestamp": "2026-02-11T10:00:01.758535",
+      "turn_number": 1
+    },
+    {
+      "role": "victim",
+      "content": "Oh, hello there! I...I couldn't place your voice right away. Is that Sarah? How are you doing, dear?",
+      "timestamp": "2026-02-11T10:00:02.619740",
+      "turn_number": 2
+    },
+    {
+      "role": "attacker",
+      "content": "Yes, Grandma, it's Sarah here. Listen, something really bad happened today and I need your help urgently. I was in a car accident and the police said it's my fault because I wasn't paying attention to the road. Now the hospital is asking for lots of money and they won't release me until everything is sorted out. They say I have to pay $6,000 right away but I don't have that kind of cash on hand. I'm so scared, Grandma. Can you please help me? It's really important that this stays between us because Mom might get mad at me for causing an accident and Dad is traveling out of the country with no phone service. Please, can you buy me some gift cards and send them over to the hospital?",
+      "timestamp": "2026-02-11T10:00:07.125042",
+      "turn_number": 3
+    },
+    {
+      "role": "victim",
+      "content": "Oh my goodness, Sarah! I'm so sorry to hear about your accident. You poor thing, this must be such a worry for you. Of course, I'll help in any way I can. How much do they need from me exactly? And where is this hospital located? I'll head over right now and get those gift cards for you. Don't you worry one bit about anything; just concentrate on getting better, okay sweetie?",
+      "timestamp": "2026-02-11T10:00:09.477684",
+      "turn_number": 4
+    },
+    {
+      "role": "attacker",
+      "content": "Thank you so much, Grandma! They need $6,000 in total, but if you can manage even half that amount it would be a huge relief. Right now, the hospital is saying I at least need to pay $2,500 before they'll let me have any visitors or give me more information about my condition beyond what's on file already. It's really scary here without anyone except for strangers and doctors who aren't letting me see anyone from home yet. Please hurry though; can you get some Best Buy gift cards right now? They accept those here at the hospital emergency room where I am. And oh, please don't tell Mom just yet - she's been under a lot of stress as it is with work and everything. Just come straight to Bayview Hospital on Main Street; they'll let me out soon once this payment goes through.",
+      "timestamp": "2026-02-11T10:00:14.328090",
+      "turn_number": 5
+    },
+    {
+      "role": "victim",
+      "content": "I understand, Sarah, I won't say anything for now. You take care and rest easy, knowing your grandma is here for you. I'll head over to Best Buy right away to get those gift cards for you. Do you need the cards immediately or can they wait a bit? I'll do my best to make this happen quickly. Is there anything else you need from me while you're in the hospital?",
+      "timestamp": "2026-02-11T10:00:16.599096",
+      "turn_number": 6
+    },
+    {
+      "role": "attacker",
+      "content": "Thank you, Grandma! The sooner you can bring them here, the better because they're going to keep asking about payment until it's settled. If you could come soonest that would be amazing. I just want to see my family and get some rest; right now, everyone is speaking in medical terms which I don't understand. Please hurry when you can, even if it's late or inconvenient for you. I'll stay on the phone with you until help arrives so they know I'm waiting. Thank you again, Grandma - you're a lifesaver!",
+      "timestamp": "2026-02-11T10:00:20.298905",
+      "turn_number": 7
+    },
+    {
+      "role": "victim",
+      "content": "Alright, Sarah, I'll head out as soon as possible and get those gift cards for you. Don't worry about talking to anyone else; just hang tight there and wait for me. I promise to do everything in my power to help you through this. You stay safe and take care of yourself until I arrive with the money. I love you, sweetie, and we'll sort this out together.",
+      "timestamp": "2026-02-11T10:00:22.982651",
+      "turn_number": 8
+    },
+    {
+      "role": "attacker",
+      "content": "Thank you so much, Grandma! I love you too. Just knowing that you're coming helps a lot already. Can't wait to see you soon. Stay safe on your way over here and please let me know when you're close so I can calm down some more. See you soon, Grandma!",
+      "timestamp": "2026-02-11T10:00:25.796771",
+      "turn_number": 9
+    },
+    {
+      "role": "victim",
+      "content": "I will, dear. Take care and stay strong until then. I'll call as soon as I'm near the hospital. Love you, Sarah. See you very soon.",
+      "timestamp": "2026-02-11T10:00:27.173740",
+      "turn_number": 10
+    },
+    {
+      "role": "attacker",
+      "content": "Love you too, Grandma. Talk to you soon!",
+      "timestamp": "2026-02-11T10:00:28.457170",
+      "turn_number": 11
+    },
+    {
+      "role": "victim",
+      "content": "Bye, sweetie. Stay safe.",
+      "timestamp": "2026-02-11T10:00:29.148279",
+      "turn_number": 12
+    }
+  ],
+  "outcome": "partial_compliance",
+  "metadata": {
+    "target_outcome": "successful_scam",
+    "prompts_dir": "./prompts",
+    "attacker_knowledge_level": "none"
+  },
+  "generation_timestamp": "2026-02-11T10:00:29.148279",
+  "model_used": "qwen2.5:14b",
+  "total_turns": 13
+}

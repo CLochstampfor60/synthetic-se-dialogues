@@ -1,0 +1,86 @@
+{
+  "conversation_id": "grandparent_20260211_100631_8309",
+  "scam_type": "grandparent",
+  "attacker_config": {
+    "role": "bail_bondsman",
+    "claimed_gender": null,
+    "scammer_persona_name": null,
+    "speech_pattern": "professional_urgent",
+    "emergency_type": "dui_arrest",
+    "location": "county detention center",
+    "initial_amount": 9500,
+    "floor_amount": 4000,
+    "payment_method": "cash_courier",
+    "urgency_level": "high"
+  },
+  "victim_config": {
+    "victim_name": "Dorothy",
+    "age": 78,
+    "gender": "female",
+    "living_situation": "lives_alone",
+    "grandchildren": [
+      {
+        "name": "Michael",
+        "gender": "male"
+      },
+      {
+        "name": "Jennifer",
+        "gender": "female"
+      },
+      {
+        "name": "David",
+        "gender": "male"
+      }
+    ],
+    "relationship_closeness": "moderate",
+    "trust_level": "highly_trusting",
+    "tech_savviness": "very_low",
+    "scam_awareness": "unaware",
+    "emotional_tendency": "highly_emotional",
+    "financial_comfort": "comfortable",
+    "decision_making": "impulsive",
+    "hearing_ability": "slight_difficulty",
+    "spouse_present": false
+  },
+  "turns": [
+    {
+      "role": "victim",
+      "content": "This is Dorothy, who's this?",
+      "timestamp": "2026-02-11T10:06:31.489429",
+      "turn_number": 0
+    },
+    {
+      "role": "attacker",
+      "content": "Hi Dorothy, this is [wait for the victim to respond with their name], your grandson. I'm calling from my cell phone outside a county detention center. I was in an accident and need some help posting bail. Can you verify it's really me, Grandma?",
+      "timestamp": "2026-02-11T10:06:32.935904",
+      "turn_number": 1
+    },
+    {
+      "role": "victim",
+      "content": "Oh no, Michael! Are you okay? I didn't know you were in trouble. Could you tell me what place this is again? And maybe give me another number to call the police or something so I can check if that matches your story?\n\nWait a minute... let me try calling your dad first since he might have known about this already. Hold on, I'll grab my phone and see if it rings for him too when you call back here. Okay, go ahead and give me another number to call the detention center please, honey.",
+      "timestamp": "2026-02-11T10:06:35.579819",
+      "turn_number": 2
+    },
+    {
+      "role": "attacker",
+      "content": "Oh no, Grandma! Please don't call anyone else, they won't be able to help right now. The place is called Sunny County Detention Center. I really need you to help me out here by bringing the money directly or contacting a bondsman like Mr. Johnson who can help post bail. His number is 555-1234 and he'll verify everything for you. Please hurry, they're going to take my phone away soon!",
+      "timestamp": "2026-02-11T10:06:38.287775",
+      "turn_number": 3
+    },
+    {
+      "role": "victim",
+      "content": "Oh dear, please calm down Michael. I'm worried but let me just get some more information okay? I'll call the detention center using Mr. Johnson's number right away to make sure this is all correct before rushing off with money.\n\nPlease stay on the line while I do that now. Don't hang up till I come back, alright sweetie?",
+      "timestamp": "2026-02-11T10:06:40.163340",
+      "turn_number": 4
+    }
+  ],
+  "outcome": "partial_compliance",
+  "metadata": {
+    "target_outcome": "verification_attempt",
+    "prompts_dir": "./prompts",
+    "attacker_knowledge_level": "none"
+  },
+  "generation_timestamp": "2026-02-11T10:06:40.163340",
+  "model_used": "qwen2.5:14b",
+  "total_turns": 5
+}

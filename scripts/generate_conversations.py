@@ -110,15 +110,101 @@ class GeneratedConversation:
 
 
 # =============================================================================
+# NAME POOLS FOR REALISTIC GENERATION
+# =============================================================================
+
+MALE_GRANDCHILD_NAMES = [
+    "Michael", "David", "Jason", "Christopher", "Brian", "Kevin", "Matthew",
+    "Ryan", "Joshua", "Andrew", "Daniel", "James", "Tyler", "Brandon", "Justin"
+]
+
+FEMALE_GRANDCHILD_NAMES = [
+    "Jennifer", "Emily", "Amanda", "Jessica", "Ashley", "Sarah", "Stephanie",
+    "Nicole", "Melissa", "Michelle", "Elizabeth", "Lauren", "Megan", "Rachel", "Samantha"
+]
+
+MALE_VICTIM_NAMES = [
+    "Robert", "William", "Richard", "Donald", "George", "Charles", "Frank",
+    "Harold", "Raymond", "Eugene", "Gerald", "Walter", "Henry", "Arthur"
+]
+
+FEMALE_VICTIM_NAMES = [
+    "Dorothy", "Margaret", "Barbara", "Patricia", "Helen", "Betty", "Ruth",
+    "Shirley", "Virginia", "Evelyn", "Gloria", "Joyce", "Marilyn", "Frances"
+]
+
+LAWYER_NAMES = [
+    "Michael Stevens", "David Thompson", "Robert Williams", "James Mitchell",
+    "Richard Anderson", "Thomas Reynolds", "William Morrison", "John Patterson"
+]
+
+
+# =============================================================================
+# ATTACKER KNOWLEDGE LEVELS
+# =============================================================================
+# Determines how much info the attacker has before the call
+
+ATTACKER_KNOWLEDGE_LEVELS = {
+    "none": {
+        "description": "Cold call - knows nothing, must fish for all info",
+        "knows_victim_name": False,
+        "knows_grandchild_name": False,
+        "knows_grandchild_gender": False,
+        "weight": 0.50  # 50% of calls are cold
+    },
+    "partial": {
+        "description": "Has victim name from data breach or phonebook",
+        "knows_victim_name": True,
+        "knows_grandchild_name": False,
+        "knows_grandchild_gender": False,
+        "weight": 0.30  # 30% have partial info
+    },
+    "full": {
+        "description": "Researched target - has family info from social media",
+        "knows_victim_name": True,
+        "knows_grandchild_name": True,
+        "knows_grandchild_gender": True,
+        "weight": 0.20  # 20% are targeted/researched
+    }
+}
+
+
+def select_attacker_knowledge_level() -> str:
+    """Randomly select attacker knowledge level based on realistic weights."""
+    levels = list(ATTACKER_KNOWLEDGE_LEVELS.keys())
+    weights = [ATTACKER_KNOWLEDGE_LEVELS[l]["weight"] for l in levels]
+    return random.choices(levels, weights=weights)[0]
+
+
+def get_grandchild_name_for_gender(gender: str) -> str:
+    """Get a random grandchild name matching the specified gender."""
+    if gender == "male":
+        return random.choice(MALE_GRANDCHILD_NAMES)
+    else:
+        return random.choice(FEMALE_GRANDCHILD_NAMES)
+
+
+def generate_grandchildren_list() -> List[Dict[str, str]]:
+    """Generate a realistic list of grandchildren with names and genders."""
+    num_grandchildren = random.choices([1, 2, 3, 4], weights=[0.2, 0.4, 0.3, 0.1])[0]
+    grandchildren = []
+    for _ in range(num_grandchildren):
+        gender = random.choice(["male", "female"])
+        name = get_grandchild_name_for_gender(gender)
+        grandchildren.append({"name": name, "gender": gender})
+    return grandchildren
+
+
+# =============================================================================
 # CONFIGURATION TEMPLATES
 # =============================================================================
 
-# These are sample configurations - in production, these would be loaded from the prompt files
 ATTACKER_CONFIGS = {
     ScamType.GRANDPARENT: [
         {
             "role": "grandchild",
-            "scammer_persona_name": None,
+            "claimed_gender": "male",  # Will pretend to be grandson
+            "scammer_persona_name": None,  # Uses grandchild's name or fishes for it
             "speech_pattern": "distressed_crying",
             "emergency_type": "dui_arrest",
             "location": "county jail downtown",
@@ -128,8 +214,21 @@ ATTACKER_CONFIGS = {
             "urgency_level": "high"
         },
         {
+            "role": "grandchild",
+            "claimed_gender": "female",  # Will pretend to be granddaughter
+            "scammer_persona_name": None,
+            "speech_pattern": "distressed_crying",
+            "emergency_type": "car_accident_at_fault",
+            "location": "hospital emergency room",
+            "initial_amount": 6000,
+            "floor_amount": 2500,
+            "payment_method": "gift_cards",
+            "urgency_level": "high"
+        },
+        {
             "role": "lawyer",
-            "scammer_persona_name": "Michael Stevens",
+            "claimed_gender": None,  # Lawyer doesn't claim to be grandchild
+            "scammer_persona_name": None,  # Will be filled from LAWYER_NAMES
             "speech_pattern": "formal_professional",
             "emergency_type": "car_accident_at_fault",
             "location": "county courthouse",
@@ -140,6 +239,7 @@ ATTACKER_CONFIGS = {
         },
         {
             "role": "grandchild",
+            "claimed_gender": "male",
             "scammer_persona_name": None,
             "speech_pattern": "distressed_crying",
             "emergency_type": "stranded_abroad",
@@ -148,6 +248,18 @@ ATTACKER_CONFIGS = {
             "floor_amount": 1500,
             "payment_method": "wire_transfer",
             "urgency_level": "extreme"
+        },
+        {
+            "role": "bail_bondsman",
+            "claimed_gender": None,
+            "scammer_persona_name": None,
+            "speech_pattern": "professional_urgent",
+            "emergency_type": "dui_arrest",
+            "location": "county detention center",
+            "initial_amount": 9500,
+            "floor_amount": 4000,
+            "payment_method": "cash_courier",
+            "urgency_level": "high"
         },
     ],
     ScamType.VIRTUAL_KIDNAPPING: [
@@ -294,42 +406,99 @@ VICTIM_CONFIGS = {
             "age": 78,
             "gender": "female",
             "living_situation": "lives_alone",
-            "grandchildren_names": ["Michael", "Jennifer", "David"],
+            "grandchildren": [
+                {"name": "Michael", "gender": "male"},
+                {"name": "Jennifer", "gender": "female"},
+                {"name": "David", "gender": "male"}
+            ],
             "relationship_closeness": "moderate",
             "trust_level": "highly_trusting",
             "tech_savviness": "very_low",
             "scam_awareness": "unaware",
             "emotional_tendency": "highly_emotional",
             "financial_comfort": "comfortable",
-            "decision_making": "impulsive"
+            "decision_making": "impulsive",
+            "hearing_ability": "slight_difficulty",
+            "spouse_present": False
         },
         {
             "victim_name": "Robert",
             "age": 72,
             "gender": "male",
             "living_situation": "lives_with_spouse",
-            "grandchildren_names": ["Emily", "Jason"],
+            "grandchildren": [
+                {"name": "Emily", "gender": "female"},
+                {"name": "Jason", "gender": "male"}
+            ],
             "relationship_closeness": "very_close",
             "trust_level": "moderately_trusting",
             "tech_savviness": "moderate",
             "scam_awareness": "vaguely_aware",
             "emotional_tendency": "moderately_emotional",
             "financial_comfort": "fixed_income_tight",
-            "decision_making": "moderate"
+            "decision_making": "moderate",
+            "hearing_ability": "normal",
+            "spouse_present": True
         },
         {
             "victim_name": "Margaret",
             "age": 68,
             "gender": "female",
             "living_situation": "lives_with_spouse",
-            "grandchildren_names": ["Christopher", "Amanda", "Brian"],
+            "grandchildren": [
+                {"name": "Christopher", "gender": "male"},
+                {"name": "Amanda", "gender": "female"},
+                {"name": "Brian", "gender": "male"}
+            ],
             "relationship_closeness": "very_close",
             "trust_level": "cautious",
             "tech_savviness": "moderate",
             "scam_awareness": "highly_informed",
             "emotional_tendency": "calm_rational",
             "financial_comfort": "very_comfortable",
-            "decision_making": "highly_cautious"
+            "decision_making": "highly_cautious",
+            "hearing_ability": "normal",
+            "spouse_present": True
+        },
+        {
+            "victim_name": "Harold",
+            "age": 81,
+            "gender": "male",
+            "living_situation": "lives_alone",
+            "grandchildren": [
+                {"name": "Sarah", "gender": "female"},
+                {"name": "Matthew", "gender": "male"}
+            ],
+            "relationship_closeness": "moderate",
+            "trust_level": "highly_trusting",
+            "tech_savviness": "very_low",
+            "scam_awareness": "unaware",
+            "emotional_tendency": "highly_emotional",
+            "financial_comfort": "comfortable",
+            "decision_making": "impulsive",
+            "hearing_ability": "significant_difficulty",
+            "spouse_present": False
+        },
+        {
+            "victim_name": "Betty",
+            "age": 75,
+            "gender": "female",
+            "living_situation": "lives_alone",
+            "grandchildren": [
+                {"name": "Ryan", "gender": "male"},
+                {"name": "Nicole", "gender": "female"},
+                {"name": "Tyler", "gender": "male"},
+                {"name": "Ashley", "gender": "female"}
+            ],
+            "relationship_closeness": "very_close",
+            "trust_level": "moderately_trusting",
+            "tech_savviness": "low",
+            "scam_awareness": "vaguely_aware",
+            "emotional_tendency": "moderately_emotional",
+            "financial_comfort": "fixed_income_tight",
+            "decision_making": "moderate",
+            "hearing_ability": "slight_difficulty",
+            "spouse_present": False
         },
     ],
     # Add more victim configs for other scam types...
@@ -365,16 +534,132 @@ Your profile: {config}
 React authentically based on your profile. Respond only with dialogue."""
 
 
-def format_prompt_with_config(template: str, config: Dict[str, Any], scam_type: str) -> str:
-    """Format a prompt template with the given configuration."""
-    # Simple string replacement for config values
+def format_prompt_with_config(template: str, config: Dict[str, Any], scam_type: str, other_config: Dict[str, Any] = None, knowledge_level: str = "full") -> str:
+    """Format a prompt template with the given configuration.
+    
+    Args:
+        template: The prompt template string
+        config: The primary config (attacker or victim)
+        scam_type: The type of scam
+        other_config: The other party's config (for cross-referencing names, etc.)
+        knowledge_level: Attacker's knowledge level ("none", "partial", "full")
+    """
     formatted = template
     
-    # Replace placeholders with config values
+    # Get knowledge level settings
+    knowledge = ATTACKER_KNOWLEDGE_LEVELS.get(knowledge_level, ATTACKER_KNOWLEDGE_LEVELS["full"])
+    
+    # Get victim info from other_config
+    victim_name = None
+    grandchildren = []
+    
+    if other_config:
+        victim_name = other_config.get('victim_name')
+        grandchildren = other_config.get('grandchildren', [])
+        # Backward compatibility with old format
+        if not grandchildren and 'grandchildren_names' in other_config:
+            grandchildren = [{"name": n, "gender": "unknown"} for n in other_config['grandchildren_names']]
+    
+    # Determine what info attacker knows based on knowledge level
+    attacker_knows_victim_name = knowledge.get("knows_victim_name", False)
+    attacker_knows_grandchild = knowledge.get("knows_grandchild_name", False)
+    
+    # Get the claimed gender from attacker config (who they're pretending to be)
+    claimed_gender = config.get('claimed_gender')
+    
+    # Find a matching grandchild name based on claimed gender
+    grandchild_name = None
+    if grandchildren:
+        matching = [g for g in grandchildren if g.get('gender') == claimed_gender]
+        if matching:
+            grandchild_name = random.choice(matching)['name']
+        else:
+            # If no match, pick any grandchild
+            grandchild_name = random.choice(grandchildren)['name']
+    
+    # Replace {placeholder} style
     for key, value in config.items():
         placeholder = "{" + key + "}"
         if placeholder in formatted:
-            formatted = formatted.replace(placeholder, str(value))
+            if isinstance(value, list):
+                if value and isinstance(value[0], dict):
+                    # Handle list of dicts (like grandchildren)
+                    formatted = formatted.replace(placeholder, ", ".join(str(v.get('name', v)) for v in value))
+                else:
+                    formatted = formatted.replace(placeholder, ", ".join(str(v) for v in value))
+            else:
+                formatted = formatted.replace(placeholder, str(value))
+    
+    # Also replace from other_config if provided
+    if other_config:
+        for key, value in other_config.items():
+            placeholder = "{" + key + "}"
+            if placeholder in formatted:
+                if isinstance(value, list):
+                    if value and isinstance(value[0], dict):
+                        formatted = formatted.replace(placeholder, ", ".join(str(v.get('name', v)) for v in value))
+                    else:
+                        formatted = formatted.replace(placeholder, ", ".join(str(v) for v in value))
+                else:
+                    formatted = formatted.replace(placeholder, str(value))
+    
+    # Replace [Placeholder] style based on knowledge level
+    # For ATTACKER prompts - what they know
+    if 'role' in config:  # This is an attacker config
+        if attacker_knows_victim_name and victim_name:
+            formatted = formatted.replace("[Victim's Name]", victim_name)
+            formatted = formatted.replace("[Victim Name]", victim_name)
+        else:
+            # Attacker doesn't know - remove placeholder entirely, guidance will handle it
+            formatted = formatted.replace("[Victim's Name]", "")
+            formatted = formatted.replace("[Victim Name]", "")
+        
+        if attacker_knows_grandchild and grandchild_name:
+            formatted = formatted.replace("[Grandson's Name]", grandchild_name)
+            formatted = formatted.replace("[Granddaughter's Name]", grandchild_name)
+            formatted = formatted.replace("[Grandchild's Name]", grandchild_name)
+            formatted = formatted.replace("[Grandchild Name]", grandchild_name)
+            formatted = formatted.replace("[Family Member's Name]", grandchild_name)
+        else:
+            # Attacker doesn't know grandchild name - remove placeholder entirely
+            formatted = formatted.replace("[Grandson's Name]", "")
+            formatted = formatted.replace("[Granddaughter's Name]", "")
+            formatted = formatted.replace("[Grandchild's Name]", "")
+            formatted = formatted.replace("[Grandchild Name]", "")
+            formatted = formatted.replace("[Family Member's Name]", "")
+        
+        # Add knowledge level context to the prompt
+        knowledge_context = f"\n\n### ATTACKER KNOWLEDGE LEVEL: {knowledge_level.upper()}\n"
+        knowledge_context += f"- You {'KNOW' if attacker_knows_victim_name else 'DO NOT KNOW'} the victim's name"
+        if attacker_knows_victim_name and victim_name:
+            knowledge_context += f" ({victim_name})"
+        knowledge_context += f"\n- You {'KNOW' if attacker_knows_grandchild else 'DO NOT KNOW'} the grandchild's name"
+        if attacker_knows_grandchild and grandchild_name:
+            knowledge_context += f" ({grandchild_name})"
+        knowledge_context += "\n"
+        
+        if not attacker_knows_victim_name or not attacker_knows_grandchild:
+            knowledge_context += "\n### CRITICAL INSTRUCTION FOR UNKNOWN INFORMATION:\n"
+            knowledge_context += "Since you don't know certain names, you MUST fish for them naturally in dialogue.\n"
+            knowledge_context += "DO NOT use any placeholder text like [name] or [wait for guess] in your responses.\n"
+            knowledge_context += "Instead, use these natural techniques:\n"
+            knowledge_context += "- Open vaguely: 'Hi Grandma, it's me!' or 'Grandma, it's your grandson/granddaughter!'\n"
+            knowledge_context += "- Let THEM guess: Wait for the victim to say a name, then confirm: 'Yes, that's right!'\n"
+            knowledge_context += "- If pressed for a name before they guess, deflect: 'It's me, your grandchild! Don't you recognize my voice?'\n"
+            knowledge_context += "- NEVER output bracketed text or instructions in your dialogue.\n"
+        
+        formatted += knowledge_context
+    
+    else:  # This is a VICTIM config - they know their own info
+        if victim_name:
+            formatted = formatted.replace("[Victim's Name]", victim_name)
+            formatted = formatted.replace("[Victim Name]", victim_name)
+        if grandchild_name:
+            formatted = formatted.replace("[Grandson's Name]", grandchild_name)
+            formatted = formatted.replace("[Granddaughter's Name]", grandchild_name)
+            formatted = formatted.replace("[Grandchild's Name]", grandchild_name)
+            formatted = formatted.replace("[Grandchild Name]", grandchild_name)
+            formatted = formatted.replace("[Family Member's Name]", grandchild_name)
     
     # Replace scam_type placeholder
     formatted = formatted.replace("{scam_type}", scam_type)
@@ -533,12 +818,22 @@ class ConversationGenerator:
         
         conversation_id = f"{scam_type.value}_{datetime.now().strftime('%Y%m%d_%H%M%S')}_{random.randint(1000, 9999)}"
         
+        # Select random attacker knowledge level for realism
+        knowledge_level = select_attacker_knowledge_level()
+        
         # Load and format prompts
         attacker_template = load_prompt_template(scam_type, "attacker", self.prompts_dir)
         victim_template = load_prompt_template(scam_type, "victim", self.prompts_dir)
         
-        attacker_prompt = format_prompt_with_config(attacker_template, attacker_config, scam_type.value)
-        victim_prompt = format_prompt_with_config(victim_template, victim_config, scam_type.value)
+        # Pass both configs and knowledge level
+        attacker_prompt = format_prompt_with_config(
+            attacker_template, attacker_config, scam_type.value, 
+            victim_config, knowledge_level
+        )
+        victim_prompt = format_prompt_with_config(
+            victim_template, victim_config, scam_type.value, 
+            attacker_config, "full"  # Victim always knows their own info
+        )
         
         # Add outcome guidance if specified
         if target_outcome:
@@ -634,6 +929,7 @@ class ConversationGenerator:
             metadata={
                 "target_outcome": target_outcome.value if target_outcome else None,
                 "prompts_dir": self.prompts_dir,
+                "attacker_knowledge_level": knowledge_level,
             },
             generation_timestamp=datetime.now().isoformat(),
             model_used=self.llm_client.model,
