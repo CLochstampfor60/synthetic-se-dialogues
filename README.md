@@ -1,5 +1,13 @@
 # Synthetic Social Engineering Dialogues
 
+<p align="center">
+  <img src="assets/banner.jpg" alt="Multi-Agent Scam Conversation Generation" width="800">
+</p>
+
+<p align="center">
+  <em>Multi-agent LLM framework for generating synthetic scam conversations</em>
+</p>
+
 A research project for generating synthetic multi-turn conversations between social engineering attackers and potential victims. Designed to create training data for scam detection systems that protect vulnerable populations.
 
 ## Author
