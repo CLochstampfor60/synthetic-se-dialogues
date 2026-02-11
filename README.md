@@ -205,16 +205,15 @@ If you use this dataset or methodology in your research, please cite:
 
 ## License
 
-[To be determined - consider MIT or CC BY-NC for research]
+MIT License
 
 ## Acknowledgments
 
 - Old Dominion University, Department of Cybersecurity
-- Faculty mentor guidance and support
+- Faculty mentor guidance and support: Professor Ayan Roy, PhD (from Christopher Newport University, CNU)
 - FBI/FTC public resources on elder fraud patterns
 
 ## Contact
 
 Carl Lochstampfor  
 Old Dominion University  
-[Your ODU email or preferred contact]
