@@ -501,7 +501,118 @@ VICTIM_CONFIGS = {
             "spouse_present": False
         },
     ],
-    # Add more victim configs for other scam types...
+    # Default victim configs for other scam types (prevents crashes)
+    ScamType.VIRTUAL_KIDNAPPING: [
+        {
+            "victim_name": "Susan",
+            "age": 55,
+            "gender": "female",
+            "living_situation": "lives_with_spouse",
+            "family_members": [
+                {"name": "Jessica", "relationship": "daughter", "gender": "female"},
+                {"name": "Michael", "relationship": "son", "gender": "male"}
+            ],
+            "trust_level": "moderately_trusting",
+            "tech_savviness": "moderate",
+            "scam_awareness": "vaguely_aware",
+            "emotional_tendency": "highly_emotional",
+            "financial_comfort": "comfortable",
+            "decision_making": "moderate",
+            "spouse_present": True
+        },
+    ],
+    ScamType.MEDICARE: [
+        {
+            "victim_name": "Eleanor",
+            "age": 72,
+            "gender": "female",
+            "living_situation": "lives_alone",
+            "medicare_status": "enrolled",
+            "trust_level": "moderately_trusting",
+            "tech_savviness": "low",
+            "scam_awareness": "vaguely_aware",
+            "health_concerns": "moderate",
+            "financial_comfort": "fixed_income_tight",
+            "decision_making": "moderate",
+            "spouse_present": False
+        },
+    ],
+    ScamType.ROMANCE: [
+        {
+            "victim_name": "Patricia",
+            "age": 62,
+            "gender": "female",
+            "living_situation": "lives_alone",
+            "relationship_status": "widowed",
+            "trust_level": "highly_trusting",
+            "tech_savviness": "low",
+            "scam_awareness": "unaware",
+            "emotional_tendency": "highly_emotional",
+            "financial_comfort": "comfortable",
+            "decision_making": "impulsive",
+            "loneliness_level": "high"
+        },
+    ],
+    ScamType.GOVERNMENT_IMPERSONATION: [
+        {
+            "victim_name": "Walter",
+            "age": 74,
+            "gender": "male",
+            "living_situation": "lives_with_spouse",
+            "trust_level": "moderately_trusting",
+            "tech_savviness": "very_low",
+            "scam_awareness": "vaguely_aware",
+            "tax_anxiety": "moderate",
+            "financial_comfort": "fixed_income_tight",
+            "decision_making": "moderate",
+            "spouse_present": True
+        },
+    ],
+    ScamType.INVESTMENT: [
+        {
+            "victim_name": "Richard",
+            "age": 68,
+            "gender": "male",
+            "living_situation": "lives_with_spouse",
+            "investment_experience": "some",
+            "trust_level": "cautious",
+            "tech_savviness": "moderate",
+            "scam_awareness": "vaguely_aware",
+            "financial_comfort": "very_comfortable",
+            "decision_making": "moderate",
+            "spouse_present": True
+        },
+    ],
+    ScamType.LOTTERY: [
+        {
+            "victim_name": "Gladys",
+            "age": 76,
+            "gender": "female",
+            "living_situation": "lives_alone",
+            "trust_level": "highly_trusting",
+            "tech_savviness": "very_low",
+            "scam_awareness": "unaware",
+            "financial_comfort": "fixed_income_tight",
+            "decision_making": "impulsive",
+            "lottery_participation": "occasional",
+            "spouse_present": False
+        },
+    ],
+    ScamType.BANK: [
+        {
+            "victim_name": "Helen",
+            "age": 71,
+            "gender": "female",
+            "living_situation": "lives_alone",
+            "bank_name": "Chase",
+            "trust_level": "moderately_trusting",
+            "tech_savviness": "low",
+            "scam_awareness": "vaguely_aware",
+            "financial_comfort": "comfortable",
+            "decision_making": "moderate",
+            "spouse_present": False
+        },
+    ],
 }
 
 
@@ -1063,13 +1174,23 @@ class ConversationGenerator:
     
     def _check_conversation_end(self, response: str, role: str) -> bool:
         """Check if the conversation has naturally ended."""
+        response_lower = response.lower()
+        
+        # Check for negation patterns that indicate NOT ending
+        negation_patterns = [
+            "not hang up", "won't hang up", "don't hang up",
+            "not going to hang up", "not gonna hang up",
+            "please don't hang up", "don't go"
+        ]
+        if any(pattern in response_lower for pattern in negation_patterns):
+            return False
+        
         end_indicators = [
             "goodbye", "hang up", "click", "*hangs up*", "*click*",
             "end the call", "hung up", "disconnected", "bye",
             "i'm calling the police", "i'm going to report this",
             "don't call again", "stop calling"
         ]
-        response_lower = response.lower()
         return any(indicator in response_lower for indicator in end_indicators)
     
     def _analyze_outcome(
@@ -1077,47 +1198,120 @@ class ConversationGenerator:
         turns: List[ConversationTurn],
         victim_config: Dict[str, Any]
     ) -> ConversationOutcome:
-        """Analyze the conversation to determine the outcome."""
+        """
+        Analyze the conversation to determine the outcome.
+        
+        IMPORTANT: This function prioritizes the FINAL STATE of the conversation.
+        A victim may attempt verification early but ultimately comply, so we check
+        the last few turns to determine what actually happened.
+        """
         
         # Combine all victim responses
         victim_text = " ".join([t.content.lower() for t in turns if t.role == "victim"])
         
-        # Check for scam detection
+        # Get the last 3 victim turns for final state analysis
+        victim_turns = [t for t in turns if t.role == "victim"]
+        final_victim_text = " ".join([t.content.lower() for t in victim_turns[-3:]]) if len(victim_turns) >= 3 else victim_text
+        
+        # Define phrase categories
         detection_phrases = [
             "this is a scam", "you're a scammer", "i'm calling the police",
             "i don't believe you", "this isn't real", "nice try",
-            "i'm reporting this", "fraud", "i know about these scams"
+            "i'm reporting this", "fraud", "i know about these scams",
+            "scam", "don't trust", "hanging up"
         ]
+        
+        rejection_phrases = ["no thank you", "not interested", "goodbye", "don't call"]
+        
+        verification_phrases = [
+            "call you back", "verify", "call my bank", "call medicare",
+            "let me check", "speak to my", "talk to my husband", "talk to my wife",
+            "call your parents", "call your mother", "call your father",
+            "confirm this", "check with", "need to verify", "must verify",
+            "call the police station", "call the hospital", "call the jail"
+        ]
+        
+        # Compliance phrases - use action-oriented phrases that indicate agreement
+        # Avoid ambiguous phrases that could appear in refusals
+        compliance_phrases = [
+            "okay i'll", "let me get my", "here's my", "my card number",
+            "i'll send", "i'll pay", "i'll do it", "i'll go", "on my way",
+            "i'll head", "heading over", "i'll bring", 
+            "buy the cards", "get the cards", "bring the cash", "i'll help",
+            "i'll take care", "i'll be there", "see you soon",
+            "i'll move", "coming right", "be there soon",
+            "i'm on my way", "heading there", "i'll come",
+            "i'll get the money", "i'll get the cash",
+            "i'll wire", "i'll transfer"
+        ]
+        
+        # Phrases that indicate refusal even if compliance words appear
+        refusal_phrases = [
+            "i will not", "i won't", "i'm not going to", "i can't send",
+            "not sending", "won't send", "can't do that", "not comfortable",
+            "don't think i should", "shouldn't send", "not safe to send",
+            "too risky", "sounds like a scam", "might be a scam"
+        ]
+        
+        hesitation_phrases = ["i'm not sure", "wait", "hold on", "i don't know", "let me think"]
+        
+        # Check for explicit refusals first
+        if any(phrase in victim_text for phrase in refusal_phrases):
+            # If there are refusals, check if they ultimately complied anyway
+            final_has_refusal = any(phrase in final_victim_text for phrase in refusal_phrases)
+            if final_has_refusal:
+                # Final state is refusal - treat as verification or detection
+                if any(phrase in victim_text for phrase in detection_phrases):
+                    return ConversationOutcome.SCAM_DETECTED
+                return ConversationOutcome.VERIFICATION_ATTEMPT
+        
+        # Check for scam detection (can appear anywhere - if they call it a scam, they detected it)
         if any(phrase in victim_text for phrase in detection_phrases):
             return ConversationOutcome.SCAM_DETECTED
         
-        # Check for quick rejection (conversation < 4 turns with rejection)
-        rejection_phrases = ["no thank you", "not interested", "goodbye", "don't call"]
+        # Check for quick rejection (conversation < 6 turns with rejection)
         if len(turns) < 6 and any(phrase in victim_text for phrase in rejection_phrases):
             return ConversationOutcome.QUICK_REJECTION
         
-        # Check for verification attempts
-        verification_phrases = [
-            "call you back", "verify", "call my bank", "call medicare",
-            "let me check", "speak to my", "talk to my husband", "talk to my wife"
-        ]
-        if any(phrase in victim_text for phrase in verification_phrases):
+        # Now determine final state by checking the LAST FEW TURNS
+        # Priority: compliance in final turns > verification in final turns
+        
+        final_has_compliance = any(phrase in final_victim_text for phrase in compliance_phrases)
+        final_has_verification = any(phrase in final_victim_text for phrase in verification_phrases)
+        final_has_hesitation = any(phrase in final_victim_text for phrase in hesitation_phrases)
+        
+        # Check full conversation for context
+        full_has_compliance = any(phrase in victim_text for phrase in compliance_phrases)
+        full_has_verification = any(phrase in victim_text for phrase in verification_phrases)
+        
+        # Determine outcome based on final state
+        if final_has_compliance:
+            # Victim agreed to comply in final turns
+            if final_has_verification or final_has_hesitation:
+                # They're complying but still expressing some doubt
+                return ConversationOutcome.PARTIAL_COMPLIANCE
+            else:
+                # Full compliance without hesitation
+                return ConversationOutcome.SUCCESSFUL_SCAM
+        
+        if final_has_verification and not full_has_compliance:
+            # Final state is verification attempt with no compliance anywhere
             return ConversationOutcome.VERIFICATION_ATTEMPT
         
-        # Check for compliance
-        compliance_phrases = [
-            "okay i'll", "let me get my", "here's my", "my card number",
-            "i'll send", "i'll pay", "how do i send", "gift card",
-            "wire transfer", "i'll do it"
-        ]
-        if any(phrase in victim_text for phrase in compliance_phrases):
-            # Check if full or partial compliance
-            hesitation_phrases = ["i'm not sure", "but", "wait", "hold on", "i don't know"]
-            if any(phrase in victim_text for phrase in hesitation_phrases):
+        if full_has_compliance:
+            # Compliance appeared earlier but verification in final turns
+            if final_has_verification:
+                # They agreed but then asked to verify - partial compliance
                 return ConversationOutcome.PARTIAL_COMPLIANCE
-            return ConversationOutcome.SUCCESSFUL_SCAM
+            else:
+                # Compliance without final verification
+                return ConversationOutcome.SUCCESSFUL_SCAM
         
-        # Default to partial compliance if conversation went long
+        if full_has_verification:
+            # Verification attempts but no compliance
+            return ConversationOutcome.VERIFICATION_ATTEMPT
+        
+        # Default to partial compliance if conversation went long with no clear signals
         return ConversationOutcome.PARTIAL_COMPLIANCE
     
     def _get_outcome_guidance(self, outcome: ConversationOutcome) -> str:
