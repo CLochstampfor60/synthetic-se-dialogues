@@ -457,7 +457,50 @@ class LLMClient:
                 max_tokens=max_tokens,
                 temperature=temperature
             )
-            return response.choices[0].message.content
+            text = response.choices[0].message.content
+            
+            # Fix common encoding issues from local models
+            text = fix_encoding(text)
+            return text
+
+
+def fix_encoding(text: str) -> str:
+    """Fix common encoding issues in model output."""
+    if text is None:
+        return text
+    
+    replacements = {
+        # Apostrophes and quotes
+        'â€™': "'",      # Right single quotation mark
+        'â€˜': "'",      # Left single quotation mark
+        'â€œ': '"',      # Left double quotation mark  
+        'â€': '"',       # Right double quotation mark (partial)
+        ''': "'",        # Unicode right single quote
+        ''': "'",        # Unicode left single quote
+        '"': '"',        # Unicode left double quote
+        '"': '"',        # Unicode right double quote
+        '\u2019': "'",   # Unicode right single quote
+        '\u2018': "'",   # Unicode left single quote
+        '\u201c': '"',   # Unicode left double quote
+        '\u201d': '"',   # Unicode right double quote
+        # Dashes
+        'â€"': '—',      # Em dash variant 1
+        'â€"': '–',      # En dash
+        'â€"': '-',      # Another dash variant - just use hyphen
+        '—': '-',        # Em dash to hyphen (simpler)
+        '–': '-',        # En dash to hyphen
+        '\u2014': '-',   # Unicode em dash
+        '\u2013': '-',   # Unicode en dash
+        # Ellipsis
+        'â€¦': '...',    # Ellipsis
+        '…': '...',      # Unicode ellipsis
+        '\u2026': '...', # Unicode ellipsis
+    }
+    
+    for bad, good in replacements.items():
+        text = text.replace(bad, good)
+    
+    return text
 
 
 # =============================================================================
