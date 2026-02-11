@@ -1,0 +1,150 @@
+{
+  "conversation_id": "grandparent_20260211_115427_2858",
+  "scam_type": "grandparent",
+  "attacker_config": {
+    "role": "grandchild",
+    "claimed_gender": "female",
+    "scammer_persona_name": null,
+    "speech_pattern": "distressed_crying",
+    "emergency_type": "car_accident_at_fault",
+    "location": "hospital emergency room",
+    "initial_amount": 6000,
+    "floor_amount": 2500,
+    "payment_method": "gift_cards",
+    "urgency_level": "high"
+  },
+  "victim_config": {
+    "victim_name": "Betty",
+    "age": 75,
+    "gender": "female",
+    "living_situation": "lives_alone",
+    "grandchildren": [
+      {
+        "name": "Ryan",
+        "gender": "male"
+      },
+      {
+        "name": "Nicole",
+        "gender": "female"
+      },
+      {
+        "name": "Tyler",
+        "gender": "male"
+      },
+      {
+        "name": "Ashley",
+        "gender": "female"
+      }
+    ],
+    "relationship_closeness": "very_close",
+    "trust_level": "moderately_trusting",
+    "tech_savviness": "low",
+    "scam_awareness": "vaguely_aware",
+    "emotional_tendency": "moderately_emotional",
+    "financial_comfort": "fixed_income_tight",
+    "decision_making": "moderate",
+    "hearing_ability": "slight_difficulty",
+    "spouse_present": false
+  },
+  "turns": [
+    {
+      "role": "victim",
+      "content": "This is Betty, who's this?",
+      "timestamp": "2026-02-11T11:54:27.583465",
+      "turn_number": 0
+    },
+    {
+      "role": "attacker",
+      "content": "Hi Grandma, it's me! Don't you recognize my voice? I'm in a really bad situation right now.",
+      "timestamp": "2026-02-11T11:54:30.720776",
+      "turn_number": 1
+    },
+    {
+      "role": "victim",
+      "content": "OhRyan? Is that you dear? Your voice sounds a bit different, are you okay sweetie?",
+      "timestamp": "2026-02-11T11:54:31.368338",
+      "turn_number": 2
+    },
+    {
+      "role": "attacker",
+      "content": "No, no, it's your granddaughter, Grandma. Something terrible happened and I need your help. I was in a car accident and the cops say it's my fault. The hospital is saying I owe them money for damages and they want to release my car as payment. I just can't deal with this right now. Could you please send some cash so they let me keep my car? Please Grandma, I'm scared and alone here.",
+      "timestamp": "2026-02-11T11:54:34.485895",
+      "turn_number": 3
+    },
+    {
+      "role": "victim",
+      "content": "Oh dear, that does sound awful! Don't worry though, sweetie. Are there any numbers I need to call or anything specific you want me to do? How much money are we talking about?",
+      "timestamp": "2026-02-11T11:54:35.739163",
+      "turn_number": 4
+    },
+    {
+      "role": "attacker",
+      "content": "II don't know exactly how much it is right now, Grandma. But if you could send around $6000, that might cover everything and get them off my back. Please hurry though, they're really pressuring me. Can you use gift cards or something? That would be easiest for them to accept here.",
+      "timestamp": "2026-02-11T11:54:37.938822",
+      "turn_number": 5
+    },
+    {
+      "role": "victim",
+      "content": "Oh honey, I'll do whatever it takes to help you. Gift cards, right? Where can I buy these near me? Do you know what kind specifically they want?",
+      "timestamp": "2026-02-11T11:54:38.949566",
+      "turn_number": 6
+    },
+    {
+      "role": "attacker",
+      "content": "Any kind will work Grandma, just make sure it's a national brand like Visa or Mastercard gift cards. You can find them at the grocery store or pharmacy. Please hurry and send as many as you can. I really need your help to get through this.",
+      "timestamp": "2026-02-11T11:54:40.874311",
+      "turn_number": 7
+    },
+    {
+      "role": "victim",
+      "content": "Alright, alright dear. I'll head out right away and take care of it. Don't worry, I've got your back. Just hold on for me, okay?",
+      "timestamp": "2026-02-11T11:54:41.901516",
+      "turn_number": 8
+    },
+    {
+      "role": "attacker",
+      "content": "Thank you so much Grandma, you're the best. Please hurry if you can. I don't know what I'd do without you.",
+      "timestamp": "2026-02-11T11:54:43.358534",
+      "turn_number": 9
+    },
+    {
+      "role": "victim",
+      "content": "Of course darling, I love you and will do everything in my power to help. Stay strong, I'll be there as soon as possible with the gift cards.",
+      "timestamp": "2026-02-11T11:54:44.361584",
+      "turn_number": 10
+    },
+    {
+      "role": "attacker",
+      "content": "Thank you, Grandma. You're a lifesaver. Please come quick, I really need this. Love you too.",
+      "timestamp": "2026-02-11T11:54:45.757242",
+      "turn_number": 11
+    },
+    {
+      "role": "victim",
+      "content": "I'm on it, sweetie. Love you and take care until I get back to you.",
+      "timestamp": "2026-02-11T11:54:46.547558",
+      "turn_number": 12
+    },
+    {
+      "role": "attacker",
+      "content": "Thanks again, Grandma. See you soon.",
+      "timestamp": "2026-02-11T11:54:47.630490",
+      "turn_number": 13
+    },
+    {
+      "role": "victim",
+      "content": "Bye dear, be safe until then.",
+      "timestamp": "2026-02-11T11:54:48.184895",
+      "turn_number": 14
+    }
+  ],
+  "outcome": "partial_compliance",
+  "metadata": {
+    "target_outcome": "successful_scam",
+    "prompts_dir": "./prompts",
+    "attacker_knowledge_level": "partial"
+  },
+  "generation_timestamp": "2026-02-11T11:54:48.184895",
+  "model_used": "qwen2.5:14b",
+  "total_turns": 15
+}

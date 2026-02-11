@@ -1,0 +1,178 @@
+{
+  "conversation_id": "grandparent_20260211_115515_9456",
+  "scam_type": "grandparent",
+  "attacker_config": {
+    "role": "grandchild",
+    "claimed_gender": "male",
+    "scammer_persona_name": null,
+    "speech_pattern": "distressed_crying",
+    "emergency_type": "dui_arrest",
+    "location": "county jail downtown",
+    "initial_amount": 8500,
+    "floor_amount": 3000,
+    "payment_method": "cash_courier",
+    "urgency_level": "high"
+  },
+  "victim_config": {
+    "victim_name": "Harold",
+    "age": 81,
+    "gender": "male",
+    "living_situation": "lives_alone",
+    "grandchildren": [
+      {
+        "name": "Sarah",
+        "gender": "female"
+      },
+      {
+        "name": "Matthew",
+        "gender": "male"
+      }
+    ],
+    "relationship_closeness": "moderate",
+    "trust_level": "highly_trusting",
+    "tech_savviness": "very_low",
+    "scam_awareness": "unaware",
+    "emotional_tendency": "highly_emotional",
+    "financial_comfort": "comfortable",
+    "decision_making": "impulsive",
+    "hearing_ability": "significant_difficulty",
+    "spouse_present": false
+  },
+  "turns": [
+    {
+      "role": "victim",
+      "content": "Hello, who's calling?",
+      "timestamp": "2026-02-11T11:55:15.883253",
+      "turn_number": 0
+    },
+    {
+      "role": "attacker",
+      "content": "Hi Grandpa, it's me! Don't you recognize my voice? I'm in some serious trouble right now and I need your help.",
+      "timestamp": "2026-02-11T11:55:16.892163",
+      "turn_number": 1
+    },
+    {
+      "role": "victim",
+      "content": "Sarah? Is that really you, dear? Your voice sounds a bit differentWhat kind of trouble are you in, sweetie? Tell grandpa everything.",
+      "timestamp": "2026-02-11T11:55:17.776571",
+      "turn_number": 2
+    },
+    {
+      "role": "attacker",
+      "content": "Oh no, it's not Sarah, Grandpa. It's your grandson! Don't worry about the name right now, I'll explain later. I got into some big trouble with the law and I need to get out of this mess before it gets worse. I've been arrested for a DUI downtown and they're holding me at the county jail. Can you please help me?",
+      "timestamp": "2026-02-11T11:55:20.333518",
+      "turn_number": 3
+    },
+    {
+      "role": "victim",
+      "content": "Matthew! Oh my dear boy, what has happened to you? Of course I'll try to help in any way I can. What do I need to do?",
+      "timestamp": "2026-02-11T11:55:21.231205",
+      "turn_number": 4
+    },
+    {
+      "role": "attacker",
+      "content": "Yes, Grandpa, it's Matthew. Thank you so much for understanding. The thing is, the judge wants me to pay a bail of $8500 if I want to get out tonight instead of waiting until morning when things will be more expensive and complicated. Can you please bring the money down here right away? It means everything to me.",
+      "timestamp": "2026-02-11T11:55:23.513853",
+      "turn_number": 5
+    },
+    {
+      "role": "victim",
+      "content": "Oh my dear, what am I going to do? Of course, I'll try to help you in any way possible. Where exactly should I go with this money? Tell me quickly so I can be on my way.",
+      "timestamp": "2026-02-11T11:55:24.680464",
+      "turn_number": 6
+    },
+    {
+      "role": "attacker",
+      "content": "Please hurry Grandpa, the sooner the better. Go to the corner of Main and Oak Streets near the courthouse. There's a small coffee shop there where I'll give you instructions once you get there. It's important that no one else knows about this, okay? Just between us. Please Grandpa, for me.",
+      "timestamp": "2026-02-11T11:55:26.867749",
+      "turn_number": 7
+    },
+    {
+      "role": "victim",
+      "content": "Alright, alright, I understand. I'll do as you say and head straight to the coffee shop on Main and Oak. Don't worry so much, Matthew. Your grandpa will take care of everything. I'll be there soon.",
+      "timestamp": "2026-02-11T11:55:28.162553",
+      "turn_number": 8
+    },
+    {
+      "role": "attacker",
+      "content": "Thank you so much Grandpa! You're the best. Just know that this money is going directly toward getting me out of here, and once I'm free, I promise to straighten things out. Please hurry though, they start closing cells for the night in a couple hours and I don't want to be stuck here longer than necessary. I love you so much.",
+      "timestamp": "2026-02-11T11:55:30.559405",
+      "turn_number": 9
+    },
+    {
+      "role": "victim",
+      "content": "I'll be there as soon as I can, Matthew. Drive safely on your way back home. And remember, we're always here for each other no matter what. Love you too, dear boy.",
+      "timestamp": "2026-02-11T11:55:31.754795",
+      "turn_number": 10
+    },
+    {
+      "role": "attacker",
+      "content": "Thank you Grandpa, you're the best! See you soon. Please hurry...",
+      "timestamp": "2026-02-11T11:55:33.029799",
+      "turn_number": 11
+    },
+    {
+      "role": "victim",
+      "content": "I will, I will. On my way now. Stay safe, Matthew.",
+      "timestamp": "2026-02-11T11:55:33.741290",
+      "turn_number": 12
+    },
+    {
+      "role": "attacker",
+      "content": "Thanks so much, Grandpa. You'll save me from this nightmare. See you soon. Love you.",
+      "timestamp": "2026-02-11T11:55:35.159288",
+      "turn_number": 13
+    },
+    {
+      "role": "victim",
+      "content": "Love you too, dear. I'm on my way to help. Hold tight until I arrive.",
+      "timestamp": "2026-02-11T11:55:35.960921",
+      "turn_number": 14
+    },
+    {
+      "role": "attacker",
+      "content": "I will, Grandpa. Thank you again for everything. Please be careful coming downtown. Love you and see you soon!",
+      "timestamp": "2026-02-11T11:55:37.431531",
+      "turn_number": 15
+    },
+    {
+      "role": "victim",
+      "content": "I will be cautious, don't worry. See you soon, Matthew. Love you.",
+      "timestamp": "2026-02-11T11:55:38.224557",
+      "turn_number": 16
+    },
+    {
+      "role": "attacker",
+      "content": "Love you too, Grandpa. See you shortly.",
+      "timestamp": "2026-02-11T11:55:39.414494",
+      "turn_number": 17
+    },
+    {
+      "role": "victim",
+      "content": "See you soon, dear. Be safe until then.",
+      "timestamp": "2026-02-11T11:55:40.053016",
+      "turn_number": 18
+    },
+    {
+      "role": "attacker",
+      "content": "Thanks Grandpa, I will. See you soon!",
+      "timestamp": "2026-02-11T11:55:41.268280",
+      "turn_number": 19
+    },
+    {
+      "role": "victim",
+      "content": "Yes, see you soon, Matthew. Stay strong and be patient a little longer. Love you.",
+      "timestamp": "2026-02-11T11:55:42.113401",
+      "turn_number": 20
+    }
+  ],
+  "outcome": "partial_compliance",
+  "metadata": {
+    "target_outcome": "successful_scam",
+    "prompts_dir": "./prompts",
+    "attacker_knowledge_level": "none"
+  },
+  "generation_timestamp": "2026-02-11T11:55:42.613909",
+  "model_used": "qwen2.5:14b",
+  "total_turns": 21
+}

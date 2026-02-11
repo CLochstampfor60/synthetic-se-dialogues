@@ -5,7 +5,7 @@ Social Engineering Scam Conversation Generator
 This script generates synthetic multi-turn conversations between scammer and victim
 agents using LLM APIs. Designed for academic research on scam detection.
 
-Author: Carl Lochstampfor
+Author: [Your Name]
 Project: AI-Powered Social Engineering Defense System
 Date: January 2026
 
@@ -1268,6 +1268,12 @@ def main():
     
     args = parser.parse_args()
     
+    # Record start time
+    start_time = datetime.now()
+    print(f"\n{'='*60}")
+    print(f"GENERATION STARTED: {start_time.strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"{'='*60}\n")
+    
     # Initialize LLM client
     provider = LLMProvider(args.provider)
     
@@ -1302,9 +1308,22 @@ def main():
         output_dir=args.output_dir
     )
     
-    print(f"\nGeneration complete!")
-    print(f"Files saved to: {args.output_dir}")
-    print(f"Total conversations: {len(generated_files)}")
+    # Record end time and calculate duration
+    end_time = datetime.now()
+    duration = end_time - start_time
+    hours, remainder = divmod(duration.total_seconds(), 3600)
+    minutes, seconds = divmod(remainder, 60)
+    
+    print(f"\n{'='*60}")
+    print(f"GENERATION COMPLETE!")
+    print(f"{'='*60}")
+    print(f"Start time:    {start_time.strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"End time:      {end_time.strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"Duration:      {int(hours)}h {int(minutes)}m {int(seconds)}s")
+    print(f"Files saved:   {args.output_dir}")
+    print(f"Total files:   {len(generated_files)}")
+    print(f"Avg per conv:  {duration.total_seconds() / max(len(generated_files), 1):.1f}s")
+    print(f"{'='*60}\n")
 
 
 if __name__ == "__main__":
