@@ -265,6 +265,30 @@ If you use this dataset or methodology in your research, please cite:
 }
 ```
 
+## Changelog / Progress
+
+| Date | Milestone |
+|------|-----------|
+| 2026-02-11 | Repository created, prompt templates completed for all 8 scam types |
+| 2026-02-11 | Pivoted from Claude API to local Qwen 2.5 14B via Ollama |
+| 2026-02-12 | Implemented quality filters (Chinese text, meta-text, bracket removal) |
+| 2026-02-12 | Grandparent dataset complete (401 conversations) |
+| 2026-02-12 | Virtual kidnapping dataset complete (400 conversations) |
+
+## Dataset Status
+
+| Scam Type | Target | Complete | Status |
+|-----------|--------|----------|--------|
+| Grandparent | 400 | 401 | ✅ Done |
+| Virtual Kidnapping | 400 | 400 | ✅ Done |
+| Medicare | 400 | 0 | ⏳ Pending |
+| Romance | 400 | 0 | ⏳ Pending |
+| Government Impersonation | 400 | 0 | ⏳ Pending |
+| Investment | 400 | 0 | ⏳ Pending |
+| Lottery | 400 | 0 | ⏳ Pending |
+| Bank | 400 | 0 | ⏳ Pending |
+| **Total** | **3,200** | **801** | **25%** |
+
 ## License
 
 MIT License
