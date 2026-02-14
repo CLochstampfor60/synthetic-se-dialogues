@@ -274,6 +274,12 @@ If you use this dataset or methodology in your research, please cite:
 | 2026-02-12 | Implemented quality filters (Chinese text, meta-text, bracket removal) |
 | 2026-02-12 | Grandparent dataset complete (401 conversations) |
 | 2026-02-12 | Virtual kidnapping dataset complete (400 conversations) |
+| 2026-02-13 | Medicare dataset complete (400 conversations) |
+| 2026-02-13 | Romance dataset complete (400 conversations) |
+| 2026-02-13 | Government impersonation dataset complete (400 conversations) |
+| 2026-02-13 | Investment dataset complete (400 conversations) |
+| 2026-02-13 | Bank dataset complete (400 conversations) |
+| 2026-02-13 | **All 8 scam types complete — dataset generation finished** |
 
 ## Dataset Status
 
@@ -281,13 +287,13 @@ If you use this dataset or methodology in your research, please cite:
 |-----------|--------|----------|--------|
 | Grandparent | 400 | 401 | ✅ Done |
 | Virtual Kidnapping | 400 | 400 | ✅ Done |
-| Medicare | 400 | 0 | ⏳ Pending |
-| Romance | 400 | 0 | ⏳ Pending |
-| Government Impersonation | 400 | 0 | ⏳ Pending |
-| Investment | 400 | 0 | ⏳ Pending |
-| Lottery | 400 | 0 | ⏳ Pending |
-| Bank | 400 | 0 | ⏳ Pending |
-| **Total** | **3,200** | **801** | **25%** |
+| Medicare | 400 | 400 | ✅ Done |
+| Romance | 400 | 400 | ✅ Done |
+| Government Impersonation | 400 | 400 | ✅ Done |
+| Investment | 400 | 400 | ✅ Done |
+| Lottery | 400 | 400 | ✅ Done |
+| Bank | 400 | 400 | ✅ Done |
+| **Total** | **3,200** | **3,201** | **100%** ✅ |
 
 ## License
 
