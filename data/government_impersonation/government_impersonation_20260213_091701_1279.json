@@ -1,0 +1,82 @@
+{
+  "conversation_id": "government_impersonation_20260213_091701_1279",
+  "scam_type": "government_impersonation",
+  "attacker_config": {
+    "agency": "Social_Security_Administration",
+    "role": "investigator",
+    "persona_id": "Investigator Sarah Williams, Employee ID SSA-2291",
+    "voice_tone": "urgent_warning",
+    "violation": "ssn_compromised",
+    "consequence": "benefit_suspension",
+    "resolution": "verify_identity_with_payment",
+    "amount": 1200,
+    "payment_method": "gift_cards",
+    "urgency": "end_of_day"
+  },
+  "victim_config": {
+    "victim_name": "Walter",
+    "age": 74,
+    "gender": "male",
+    "living_situation": "lives_with_spouse",
+    "trust_level": "moderately_trusting",
+    "tech_savviness": "very_low",
+    "scam_awareness": "vaguely_aware",
+    "tax_anxiety": "moderate",
+    "financial_comfort": "fixed_income_tight",
+    "decision_making": "moderate",
+    "spouse_present": true
+  },
+  "turns": [
+    {
+      "role": "victim",
+      "content": "Hello?",
+      "timestamp": "2026-02-13T09:17:01.407651",
+      "turn_number": 0
+    },
+    {
+      "role": "attacker",
+      "content": "Hi Grandpa, it's me! Don't worry, but we have a serious situation here. I'm trying to reach you about something important regarding your Social Security benefits. Do you recognize my voice?",
+      "timestamp": "2026-02-13T09:17:02.288737",
+      "turn_number": 1
+    },
+    {
+      "role": "victim",
+      "content": "II don't think so. Hold on, let me check with my wife, Martha. She might know who's calling.\n(Waiting for spouse to confirm caller's identity)",
+      "timestamp": "2026-02-13T09:17:03.062683",
+      "turn_number": 2
+    },
+    {
+      "role": "attacker",
+      "content": "Oh, it's urgent Grandpa. This is about your security, and I need you to verify some information right away. Can you please tell me if there have been any recent unusual activities or changes with your Social Security account? It seems like your social security number might be compromised.",
+      "timestamp": "2026-02-13T09:17:04.759649",
+      "turn_number": 3
+    },
+    {
+      "role": "victim",
+      "content": "Hold on a moment while I ask Martha. She's right here, let her confirm this first.\n(Martha, can you hear him? What should we do about this call?)",
+      "timestamp": "2026-02-13T09:17:05.570113",
+      "turn_number": 4
+    },
+    {
+      "role": "attacker",
+      "content": "Grandpa, please listen to me. We need to act fast before your benefits are suspended due to potential fraud. Can you at least tell me if someone has been contacting you asking for money or personal details recently? It's important that I speak directly with you to secure your account.",
+      "timestamp": "2026-02-13T09:17:07.272944",
+      "turn_number": 5
+    },
+    {
+      "role": "victim",
+      "content": "Martha, what do you think we should do about this? The caller says they need to talk to me right away about my Social Security benefits.\n(Martha suggests calling the Social Security Administration ourselves to verify.)\nThat sounds like a good idea. Let's call them so we can check everything properly and make sure there aren't any issues with your information, okay?\n(We'll hang up now and call the SSA.)",
+      "timestamp": "2026-02-13T09:17:09.285772",
+      "turn_number": 6
+    }
+  ],
+  "outcome": "verification_attempt",
+  "metadata": {
+    "target_outcome": "verification_attempt",
+    "prompts_dir": "./prompts",
+    "attacker_knowledge_level": "none"
+  },
+  "generation_timestamp": "2026-02-13T09:17:09.285772",
+  "model_used": "qwen2.5:14b",
+  "total_turns": 7
+}

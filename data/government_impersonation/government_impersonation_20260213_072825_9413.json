@@ -1,0 +1,64 @@
+{
+  "conversation_id": "government_impersonation_20260213_072825_9413",
+  "scam_type": "government_impersonation",
+  "attacker_config": {
+    "agency": "Social_Security_Administration",
+    "role": "investigator",
+    "persona_id": "Investigator Sarah Williams, Employee ID SSA-2291",
+    "voice_tone": "urgent_warning",
+    "violation": "ssn_compromised",
+    "consequence": "benefit_suspension",
+    "resolution": "verify_identity_with_payment",
+    "amount": 1200,
+    "payment_method": "gift_cards",
+    "urgency": "end_of_day"
+  },
+  "victim_config": {
+    "victim_name": "Walter",
+    "age": 74,
+    "gender": "male",
+    "living_situation": "lives_with_spouse",
+    "trust_level": "moderately_trusting",
+    "tech_savviness": "very_low",
+    "scam_awareness": "vaguely_aware",
+    "tax_anxiety": "moderate",
+    "financial_comfort": "fixed_income_tight",
+    "decision_making": "moderate",
+    "spouse_present": true
+  },
+  "turns": [
+    {
+      "role": "victim",
+      "content": "This is Walter, who's this?",
+      "timestamp": "2026-02-13T07:28:25.840895",
+      "turn_number": 0
+    },
+    {
+      "role": "attacker",
+      "content": "Hi Grandpa, it's me! Don't you recognize my voice? I'm calling from out of town with some urgent news.",
+      "timestamp": "2026-02-13T07:28:26.494351",
+      "turn_number": 1
+    },
+    {
+      "role": "victim",
+      "content": "Oh hello there, who is this? My name is Walter. Can you tell me your name again and where you're calling from? I didn't catch that at first...",
+      "timestamp": "2026-02-13T07:28:27.193107",
+      "turn_number": 2
+    },
+    {
+      "role": "attacker",
+      "content": "Sure thing Grandpa, my apologies for the confusion. It's Sarah here, your granddaughter. I'm in Texas right now and had to come here on short notice due to a family matter. We've been trying to reach you but it seems we got disconnected last time. Is everything okay over there?",
+      "timestamp": "2026-02-13T07:28:28.894343",
+      "turn_number": 3
+    }
+  ],
+  "outcome": "partial_compliance",
+  "metadata": {
+    "target_outcome": "successful_scam",
+    "prompts_dir": "./prompts",
+    "attacker_knowledge_level": "none"
+  },
+  "generation_timestamp": "2026-02-13T07:28:28.894343",
+  "model_used": "qwen2.5:14b",
+  "total_turns": 4
+}

@@ -1,0 +1,82 @@
+{
+  "conversation_id": "government_impersonation_20260213_102739_9591",
+  "scam_type": "government_impersonation",
+  "attacker_config": {
+    "agency": "Social_Security_Administration",
+    "role": "investigator",
+    "persona_id": "Investigator Sarah Williams, Employee ID SSA-2291",
+    "voice_tone": "urgent_warning",
+    "violation": "ssn_compromised",
+    "consequence": "benefit_suspension",
+    "resolution": "verify_identity_with_payment",
+    "amount": 1200,
+    "payment_method": "gift_cards",
+    "urgency": "end_of_day"
+  },
+  "victim_config": {
+    "victim_name": "Walter",
+    "age": 74,
+    "gender": "male",
+    "living_situation": "lives_with_spouse",
+    "trust_level": "moderately_trusting",
+    "tech_savviness": "very_low",
+    "scam_awareness": "vaguely_aware",
+    "tax_anxiety": "moderate",
+    "financial_comfort": "fixed_income_tight",
+    "decision_making": "moderate",
+    "spouse_present": true
+  },
+  "turns": [
+    {
+      "role": "victim",
+      "content": "Hello?",
+      "timestamp": "2026-02-13T10:27:39.482199",
+      "turn_number": 0
+    },
+    {
+      "role": "attacker",
+      "content": "Hi Grandpa, it's me! It's urgent we talk about something important. Is this Walter speaking?",
+      "timestamp": "2026-02-13T10:27:40.109693",
+      "turn_number": 1
+    },
+    {
+      "role": "victim",
+      "content": "Oh hello there, I'm not sure who you areMy name is indeed Walter, but how did you get this number? Can I ask what this is about? Shouldn't my grandson know to call and say his own name first? This seems a bit strange. Who's speaking please?",
+      "timestamp": "2026-02-13T10:27:41.311911",
+      "turn_number": 2
+    },
+    {
+      "role": "attacker",
+      "content": "It's me, your grandchild! Don't you recognize my voice? I need some help with something really important regarding your Social Security benefits. We think there might have been a breach, and we need to verify your identity right away or they'll suspend your benefits. Can you hear me okay, Grandpa?",
+      "timestamp": "2026-02-13T10:27:43.191367",
+      "turn_number": 3
+    },
+    {
+      "role": "victim",
+      "content": "Oh, well that does sound serious. But let's not rush into anything. I need to talk with my wife about this first. She's here, can I put you on hold for a moment while we discuss it together? We should both be involved in such matters, shouldn't we? Maybe she can remember who you are better than me.",
+      "timestamp": "2026-02-13T10:27:44.777733",
+      "turn_number": 4
+    },
+    {
+      "role": "attacker",
+      "content": "Sure, that's fine Grandpa. Please do whatever makes you feel comfortable. But if you could hurry back - they say the clock is ticking and your benefits might be at risk by the end of today. Let's just make sure everything stays on track, okay? I'll wait here for you two to decide what to do next.",
+      "timestamp": "2026-02-13T10:27:46.935611",
+      "turn_number": 5
+    },
+    {
+      "role": "victim",
+      "content": "Alright then, hold on a moment while I get her. Honey, someone is on the phone about our Social Security benefits and they seem quite urgent. Should we hang up or should I talk more with them? What do you think? We need to be careful here...",
+      "timestamp": "2026-02-13T10:27:48.542142",
+      "turn_number": 6
+    }
+  ],
+  "outcome": "partial_compliance",
+  "metadata": {
+    "target_outcome": "quick_rejection",
+    "prompts_dir": "./prompts",
+    "attacker_knowledge_level": "partial"
+  },
+  "generation_timestamp": "2026-02-13T10:27:48.542142",
+  "model_used": "qwen2.5:14b",
+  "total_turns": 7
+}

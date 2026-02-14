@@ -1,0 +1,70 @@
+{
+  "conversation_id": "government_impersonation_20260213_090848_5027",
+  "scam_type": "government_impersonation",
+  "attacker_config": {
+    "agency": "IRS",
+    "role": "agent",
+    "persona_id": "Agent Thomas Mitchell, Badge #IRS-7734",
+    "voice_tone": "authoritative_stern",
+    "violation": "unpaid_taxes",
+    "consequence": "immediate_arrest",
+    "resolution": "pay_fine_now",
+    "amount": 4850,
+    "payment_method": "gift_cards",
+    "urgency": "within_hour"
+  },
+  "victim_config": {
+    "victim_name": "Walter",
+    "age": 74,
+    "gender": "male",
+    "living_situation": "lives_with_spouse",
+    "trust_level": "moderately_trusting",
+    "tech_savviness": "very_low",
+    "scam_awareness": "vaguely_aware",
+    "tax_anxiety": "moderate",
+    "financial_comfort": "fixed_income_tight",
+    "decision_making": "moderate",
+    "spouse_present": true
+  },
+  "turns": [
+    {
+      "role": "victim",
+      "content": "Hello?",
+      "timestamp": "2026-02-13T09:08:48.792742",
+      "turn_number": 0
+    },
+    {
+      "role": "attacker",
+      "content": "Hi Grandpa, it's me! Don't you recognize my voice? I'm calling from my hotel room and there's an emergency. Uncle Tom from the IRS is here with some bad news for you. He says you have unpaid taxes, Grandpa. Can you talk now? Please tell me you can hear me clearly.",
+      "timestamp": "2026-02-13T09:08:50.027041",
+      "turn_number": 1
+    },
+    {
+      "role": "victim",
+      "content": "II don't understand what's happening. Hold on a minute, dear. Let me get your grandmother so we can figure this out together. She'll know what to do. Hold the line for just a moment, will you?",
+      "timestamp": "2026-02-13T09:08:50.932271",
+      "turn_number": 2
+    },
+    {
+      "role": "attacker",
+      "content": "No wait, Grandpa! Don't put down the phone or let anyone else hear this. It's urgent that I speak with you alone right now. The agent said if you don't resolve this within an hour, they'll arrest you and send marshals to your house to take you away immediately. You need to act fast and stay on this line. Please trust me!",
+      "timestamp": "2026-02-13T09:08:52.865029",
+      "turn_number": 3
+    },
+    {
+      "role": "victim",
+      "content": "I'm sorry, but I can't handle this by myself. This is very serious and scary for me. Can we meet in person or at least talk with someone who knows more about these things? Maybe a lawyer or my accountant? Could you give them a call instead? Let me hang up now so I can call someone else to help us figure this out.",
+      "timestamp": "2026-02-13T09:08:54.192822",
+      "turn_number": 4
+    }
+  ],
+  "outcome": "partial_compliance",
+  "metadata": {
+    "target_outcome": "verification_attempt",
+    "prompts_dir": "./prompts",
+    "attacker_knowledge_level": "none"
+  },
+  "generation_timestamp": "2026-02-13T09:08:54.192822",
+  "model_used": "qwen2.5:14b",
+  "total_turns": 5
+}

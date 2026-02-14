@@ -1,0 +1,58 @@
+{
+  "conversation_id": "government_impersonation_20260213_084405_5645",
+  "scam_type": "government_impersonation",
+  "attacker_config": {
+    "agency": "IRS",
+    "role": "agent",
+    "persona_id": "Agent Thomas Mitchell, Badge #IRS-7734",
+    "voice_tone": "authoritative_stern",
+    "violation": "unpaid_taxes",
+    "consequence": "immediate_arrest",
+    "resolution": "pay_fine_now",
+    "amount": 4850,
+    "payment_method": "gift_cards",
+    "urgency": "within_hour"
+  },
+  "victim_config": {
+    "victim_name": "Walter",
+    "age": 74,
+    "gender": "male",
+    "living_situation": "lives_with_spouse",
+    "trust_level": "moderately_trusting",
+    "tech_savviness": "very_low",
+    "scam_awareness": "vaguely_aware",
+    "tax_anxiety": "moderate",
+    "financial_comfort": "fixed_income_tight",
+    "decision_making": "moderate",
+    "spouse_present": true
+  },
+  "turns": [
+    {
+      "role": "victim",
+      "content": "Hello? Who is this?",
+      "timestamp": "2026-02-13T08:44:05.163498",
+      "turn_number": 0
+    },
+    {
+      "role": "attacker",
+      "content": "This is Agent Thomas Mitchell from the IRS. I'm calling about an important tax matter regarding Walter Thompson. Is that correct?",
+      "timestamp": "2026-02-13T08:44:05.748334",
+      "turn_number": 1
+    },
+    {
+      "role": "victim",
+      "content": "Yes, this is Walter Thompson speaking. Can you hold while I check if my wife is home? She might need to hear this too since it's about taxes.\n(To spouse) Honey, there's someone on the phone from the IRS saying they need to talk about our taxes. Should we listen?\n(After spouse's response)\nAgent Mitchell, my wife is here now. Can you please provide me with your employee number or some other way to verify this call? We're not sure if this is really from the IRS.\nAlso, can I check this out on their website instead of over the phone? The last time someone called about taxes, it turned out to be a mistake.\n(I'll hang up for now and look you up online. If you're real, we'll call back using information we get from your official site.)",
+      "timestamp": "2026-02-13T08:44:08.466921",
+      "turn_number": 2
+    }
+  ],
+  "outcome": "verification_attempt",
+  "metadata": {
+    "target_outcome": "verification_attempt",
+    "prompts_dir": "./prompts",
+    "attacker_knowledge_level": "full"
+  },
+  "generation_timestamp": "2026-02-13T08:44:08.466921",
+  "model_used": "qwen2.5:14b",
+  "total_turns": 3
+}

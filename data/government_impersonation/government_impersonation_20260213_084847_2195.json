@@ -1,0 +1,70 @@
+{
+  "conversation_id": "government_impersonation_20260213_084847_2195",
+  "scam_type": "government_impersonation",
+  "attacker_config": {
+    "agency": "IRS",
+    "role": "agent",
+    "persona_id": "Agent Thomas Mitchell, Badge #IRS-7734",
+    "voice_tone": "authoritative_stern",
+    "violation": "unpaid_taxes",
+    "consequence": "immediate_arrest",
+    "resolution": "pay_fine_now",
+    "amount": 4850,
+    "payment_method": "gift_cards",
+    "urgency": "within_hour"
+  },
+  "victim_config": {
+    "victim_name": "Walter",
+    "age": 74,
+    "gender": "male",
+    "living_situation": "lives_with_spouse",
+    "trust_level": "moderately_trusting",
+    "tech_savviness": "very_low",
+    "scam_awareness": "vaguely_aware",
+    "tax_anxiety": "moderate",
+    "financial_comfort": "fixed_income_tight",
+    "decision_making": "moderate",
+    "spouse_present": true
+  },
+  "turns": [
+    {
+      "role": "victim",
+      "content": "Yes, hello?",
+      "timestamp": "2026-02-13T08:48:47.364987",
+      "turn_number": 0
+    },
+    {
+      "role": "attacker",
+      "content": "Hi Grandpa, it's me! Don't you recognize my voice? I'm calling about a serious situation and I need your help right away.",
+      "timestamp": "2026-02-13T08:48:48.044332",
+      "turn_number": 1
+    },
+    {
+      "role": "victim",
+      "content": "Hello there, this is Walter. I'm sorry, but your voice doesn't quite sound familiar to me. Can you tell me who you are again? And maybe I can call the number on file for verification if it's important like that.",
+      "timestamp": "2026-02-13T08:48:48.944986",
+      "turn_number": 2
+    },
+    {
+      "role": "attacker",
+      "content": "Oh Grandpa, it's It's your grandson calling! We have a real problem here and we need to act fast before it gets worse. Listen, there's been an issue with some unpaid taxes from your account and the IRS is not happy about it. If you don't resolve this right away, they're going to come arrest me within the hour! You know I can't go to jail for this. Can you please help us out?",
+      "timestamp": "2026-02-13T08:48:51.131446",
+      "turn_number": 3
+    },
+    {
+      "role": "victim",
+      "content": "Oh my, that does sound serious. Let me think for a moment. Why don't we hang up and I'll call your mom's number so she can confirm who you are and what exactly is going on. She has all the correct information to verify this. Can you give me a minute?",
+      "timestamp": "2026-02-13T08:48:52.252102",
+      "turn_number": 4
+    }
+  ],
+  "outcome": "verification_attempt",
+  "metadata": {
+    "target_outcome": "verification_attempt",
+    "prompts_dir": "./prompts",
+    "attacker_knowledge_level": "none"
+  },
+  "generation_timestamp": "2026-02-13T08:48:52.252102",
+  "model_used": "qwen2.5:14b",
+  "total_turns": 5
+}

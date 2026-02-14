@@ -1,0 +1,58 @@
+{
+  "conversation_id": "government_impersonation_20260213_101626_4561",
+  "scam_type": "government_impersonation",
+  "attacker_config": {
+    "agency": "IRS",
+    "role": "agent",
+    "persona_id": "Agent Thomas Mitchell, Badge #IRS-7734",
+    "voice_tone": "authoritative_stern",
+    "violation": "unpaid_taxes",
+    "consequence": "immediate_arrest",
+    "resolution": "pay_fine_now",
+    "amount": 4850,
+    "payment_method": "gift_cards",
+    "urgency": "within_hour"
+  },
+  "victim_config": {
+    "victim_name": "Walter",
+    "age": 74,
+    "gender": "male",
+    "living_situation": "lives_with_spouse",
+    "trust_level": "moderately_trusting",
+    "tech_savviness": "very_low",
+    "scam_awareness": "vaguely_aware",
+    "tax_anxiety": "moderate",
+    "financial_comfort": "fixed_income_tight",
+    "decision_making": "moderate",
+    "spouse_present": true
+  },
+  "turns": [
+    {
+      "role": "victim",
+      "content": "This is Walter, who's this?",
+      "timestamp": "2026-02-13T10:16:26.007595",
+      "turn_number": 0
+    },
+    {
+      "role": "attacker",
+      "content": "Hi Grandpa, it's me! Don't you recognize my voice? I'm in a bit of trouble and need your help. Uncle Tom from the IRS called earlier today saying there's an urgent matter regarding unpaid taxes that could lead to some serious consequences if not handled right away. They mentioned something about fines and threats of arrest if we don't resolve it quickly within the hour. Can you please help me pay off this fine using a gift card? It's important we take care of this ASAP to avoid any issues. Could you tell me your name so I know who exactly I'm talking to, Grandpa?",
+      "timestamp": "2026-02-13T10:16:28.593938",
+      "turn_number": 1
+    },
+    {
+      "role": "victim",
+      "content": "I'm not sure who this is or why you think I'm your grandpa. My name is Walter. Can you please explain what you mean about Uncle Tom from the IRS? This sounds very serious and unusual. Hold on a moment while I ask my wife what she thinks of this call.\n(Waiting for spouse to join conversation)\nHello, this is Walter's wife here. We did not get any notice or calls regarding any tax issues. Whoever called earlier must be mistaken. He should contact the IRS directly if there's really something wrong. Thank you and goodbye.",
+      "timestamp": "2026-02-13T10:16:31.089747",
+      "turn_number": 2
+    }
+  ],
+  "outcome": "quick_rejection",
+  "metadata": {
+    "target_outcome": "quick_rejection",
+    "prompts_dir": "./prompts",
+    "attacker_knowledge_level": "none"
+  },
+  "generation_timestamp": "2026-02-13T10:16:31.089747",
+  "model_used": "qwen2.5:14b",
+  "total_turns": 3
+}

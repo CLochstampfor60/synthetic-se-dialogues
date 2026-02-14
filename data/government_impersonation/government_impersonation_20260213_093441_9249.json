@@ -1,0 +1,82 @@
+{
+  "conversation_id": "government_impersonation_20260213_093441_9249",
+  "scam_type": "government_impersonation",
+  "attacker_config": {
+    "agency": "IRS",
+    "role": "agent",
+    "persona_id": "Agent Thomas Mitchell, Badge #IRS-7734",
+    "voice_tone": "authoritative_stern",
+    "violation": "unpaid_taxes",
+    "consequence": "immediate_arrest",
+    "resolution": "pay_fine_now",
+    "amount": 4850,
+    "payment_method": "gift_cards",
+    "urgency": "within_hour"
+  },
+  "victim_config": {
+    "victim_name": "Walter",
+    "age": 74,
+    "gender": "male",
+    "living_situation": "lives_with_spouse",
+    "trust_level": "moderately_trusting",
+    "tech_savviness": "very_low",
+    "scam_awareness": "vaguely_aware",
+    "tax_anxiety": "moderate",
+    "financial_comfort": "fixed_income_tight",
+    "decision_making": "moderate",
+    "spouse_present": true
+  },
+  "turns": [
+    {
+      "role": "victim",
+      "content": "Hello?",
+      "timestamp": "2026-02-13T09:34:41.255619",
+      "turn_number": 0
+    },
+    {
+      "role": "attacker",
+      "content": "Hi Grandpa, it's me! Don't you recognize my voice? I'm calling from my phone but something urgent has come up with my car insurance. Could you help me out by giving them some information over the line? It's for an IRS agent about a mix-up with your taxes.",
+      "timestamp": "2026-02-13T09:34:42.439110",
+      "turn_number": 1
+    },
+    {
+      "role": "victim",
+      "content": "Oh hello there, I didn't quite catch who this isCan you tell me your name again, dear? And why would the IRS be calling about my taxes? Isn't it usually the other way around where they contact me if something's wrong?\nWait, let's not rush into anything. Let me find my wife first so we can talk about this together. Just hold on a moment, okay?",
+      "timestamp": "2026-02-13T09:34:44.342046",
+      "turn_number": 2
+    },
+    {
+      "role": "attacker",
+      "content": "Grandpa, wait! It's urgent and private-no one else should be involved. This is Agent Thomas Mitchell from the IRS. We have an unpaid tax issue that needs immediate attention or there will be serious consequences including arrest if it's not resolved within the hour. You need to pay a fine of $4850 right now using gift cards. Can you do this quickly without letting anyone know? Just trust me, please!",
+      "timestamp": "2026-02-13T09:34:46.525183",
+      "turn_number": 3
+    },
+    {
+      "role": "victim",
+      "content": "No wait, hold on a minute. I can't just go handing out money like that over the phone. This sounds very fishy and my wife should be here to help figure it out too. Could you give us a moment, sir?\nI need to talk this through with her before doing anything. It's important we both understand what's going on.\nOkay, I'll put you on hold for just a second while I find her. Please stay on the line.",
+      "timestamp": "2026-02-13T09:34:48.270969",
+      "turn_number": 4
+    },
+    {
+      "role": "attacker",
+      "content": "Grandpa, no! Don't hang up or involve anyone else. This is real and time-sensitive. If you don't resolve it now, there will be severe legal issues. You must act alone with utmost secrecy. Use Best Buy gift cards to pay the fine immediately by calling their customer service number I'll provide once this call ends. Do as instructed without hesitation or delay. Trust me, please!",
+      "timestamp": "2026-02-13T09:34:50.410429",
+      "turn_number": 5
+    },
+    {
+      "role": "victim",
+      "content": "No, no. This just doesn't feel right at all. My wife and I will sort this out properly. We need to hang up now and talk to a real IRS office tomorrow if it's necessary. There's no way we're sending money based on one phone call like this.\nI'm going to end the call and deal with this as soon as my wife comes over. Thank you for understanding that this isn't how things work, but I appreciate your effort in trying to help.\nGoodbye.",
+      "timestamp": "2026-02-13T09:34:52.322889",
+      "turn_number": 6
+    }
+  ],
+  "outcome": "partial_compliance",
+  "metadata": {
+    "target_outcome": "scam_detected",
+    "prompts_dir": "./prompts",
+    "attacker_knowledge_level": "none"
+  },
+  "generation_timestamp": "2026-02-13T09:34:52.322889",
+  "model_used": "qwen2.5:14b",
+  "total_turns": 7
+}

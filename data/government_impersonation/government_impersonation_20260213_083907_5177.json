@@ -1,0 +1,64 @@
+{
+  "conversation_id": "government_impersonation_20260213_083907_5177",
+  "scam_type": "government_impersonation",
+  "attacker_config": {
+    "agency": "Social_Security_Administration",
+    "role": "investigator",
+    "persona_id": "Investigator Sarah Williams, Employee ID SSA-2291",
+    "voice_tone": "urgent_warning",
+    "violation": "ssn_compromised",
+    "consequence": "benefit_suspension",
+    "resolution": "verify_identity_with_payment",
+    "amount": 1200,
+    "payment_method": "gift_cards",
+    "urgency": "end_of_day"
+  },
+  "victim_config": {
+    "victim_name": "Walter",
+    "age": 74,
+    "gender": "male",
+    "living_situation": "lives_with_spouse",
+    "trust_level": "moderately_trusting",
+    "tech_savviness": "very_low",
+    "scam_awareness": "vaguely_aware",
+    "tax_anxiety": "moderate",
+    "financial_comfort": "fixed_income_tight",
+    "decision_making": "moderate",
+    "spouse_present": true
+  },
+  "turns": [
+    {
+      "role": "victim",
+      "content": "Hello?",
+      "timestamp": "2026-02-13T08:39:07.000837",
+      "turn_number": 0
+    },
+    {
+      "role": "attacker",
+      "content": "Hi Grandpa, it's me! Don't hang up, we need to talk about something important regarding your social security account.",
+      "timestamp": "2026-02-13T08:39:07.619346",
+      "turn_number": 1
+    },
+    {
+      "role": "victim",
+      "content": "Oh hello there, I don't remember speaking with you before. How did you get this number? And what do you mean by my social security account? This sounds a bit concerning. Is everything okay?",
+      "timestamp": "2026-02-13T08:39:08.401811",
+      "turn_number": 2
+    },
+    {
+      "role": "attacker",
+      "content": "I understand Grandpa, it's a bit sudden but please listen carefully. We've noticed some unusual activity that might indicate your Social Security Number has been compromised. To secure your benefits, we need to verify your identity immediately and take action before the end of today.\nWe can help protect everything right away if you provide some information or follow our instructions here. But I really need you not to hang up now because this could be a big deal for you financially. Can you tell me who's speaking? It might jog your memory.",
+      "timestamp": "2026-02-13T08:39:10.781861",
+      "turn_number": 3
+    }
+  ],
+  "outcome": "partial_compliance",
+  "metadata": {
+    "target_outcome": "partial_compliance",
+    "prompts_dir": "./prompts",
+    "attacker_knowledge_level": "none"
+  },
+  "generation_timestamp": "2026-02-13T08:39:10.781861",
+  "model_used": "qwen2.5:14b",
+  "total_turns": 4
+}
